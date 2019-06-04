@@ -1,0 +1,25 @@
+uuid: f066b53e-b8bb-43b2-8ccf-b191903cc3d0
+langcode: ru
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - news
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: news_branding
+theme: news
+region: header
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Брендинг сайта'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

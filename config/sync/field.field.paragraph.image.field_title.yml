@@ -1,0 +1,19 @@
+uuid: eb8bfb89-d91f-4eda-8547-e33ed4729ab5
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.image
+id: paragraph.image.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: image
+label: Заголовок
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

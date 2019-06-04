@@ -1,0 +1,9 @@
+uuid: 54260e01-5834-4d81-b930-92e12d858b86
+langcode: ru
+status: true
+dependencies: {  }
+id: gallery
+label: Галерея
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

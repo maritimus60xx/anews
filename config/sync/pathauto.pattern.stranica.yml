@@ -1,0 +1,22 @@
+uuid: f887187d-720c-443d-b62a-3e62dcea9b43
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+id: stranica
+label: страница
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  7e899d45-203c-4af6-a554-07abdd2c9e10:
+    id: node_type
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 7e899d45-203c-4af6-a554-07abdd2c9e10
+selection_logic: and
+weight: -5
+relationships: {  }

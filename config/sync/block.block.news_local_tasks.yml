@@ -1,0 +1,22 @@
+uuid: 08eb4f03-6d43-4c9e-87af-fd76dab65bb6
+langcode: ru
+status: true
+dependencies:
+  theme:
+    - news
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: news_local_tasks
+theme: news
+region: content
+weight: -40
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Вкладки
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

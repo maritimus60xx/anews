@@ -1,0 +1,21 @@
+uuid: eba7fee1-bb33-48f5-a016-77eb942e5ef3
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_body
+    - paragraphs.paragraphs_type.image_and_text
+  module:
+    - text
+id: paragraph.image_and_text.field_body
+field_name: field_body
+entity_type: paragraph
+bundle: image_and_text
+label: Содержимое
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,22 @@
+uuid: ce48cf8e-4158-4ffc-a70b-8aeca247e435
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+id: new_article
+label: 'новая статья'
+type: 'canonical_entities:node'
+pattern: 'article/[node:title]'
+selection_criteria:
+  cef894ad-beef-48f5-8062-dff0648e114c:
+    id: node_type
+    bundles:
+      article: article
+    negate: false
+    context_mapping:
+      node: node
+    uuid: cef894ad-beef-48f5-8062-dff0648e114c
+selection_logic: and
+weight: -5
+relationships: {  }
