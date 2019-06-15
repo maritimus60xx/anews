@@ -1,0 +1,21 @@
+.form-search-block-form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.form-search-block-form__keys {
+  margin-bottom: 0px;
+  width: 310px;
+}
+.form-search {
+  border-radius: 0px;
+  border: none;
+}
+.button {
+  background-color: #fb9a3a;
+  border-radius: 0px;
+  text-transform: uppercase;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+}

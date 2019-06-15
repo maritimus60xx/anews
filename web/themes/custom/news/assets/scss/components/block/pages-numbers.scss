@@ -1,0 +1,25 @@
+.pager__items {
+  margin: 0 auto;
+}
+.pager__item a {
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  &:hover {
+    color: #69ac3f;
+    text-decoration: underline;
+  }
+}
+.pager__items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .is-active a {
+    font-size: 18px;
+    line-height: 17px;
+    color: #000000;
+    text-decoration: none;
+    border: none ;
+  }
+}
+

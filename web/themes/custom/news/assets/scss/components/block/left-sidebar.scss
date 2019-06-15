@@ -1,0 +1,81 @@
+.region-sidebar-first {
+  max-width: 320px;
+  min-width: 320px;
+
+}
+.block-news-tools {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.block-news-tools-title {
+  font-size: 20px;
+  line-height: 24px;
+  color: #202124;
+  font-weight: 700;
+}
+.block-news-tools__menu {
+  padding: 0px;
+  margin: 0px;
+}
+.block-news-tools__menu-item {
+  margin-left: 10px;
+}
+.block-news-tools__menu-item-link {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+//початок лівого блоку з новинами
+
+.views-block-news-block-left {
+  max-height: 1480px;
+  box-shadow: 0 0 8px 1px #CCCCCC;
+}
+.views-block-news-block-left__title {
+  width: 100%;
+  border-bottom: 2px solid #68ac3e;
+  font-family: "Ubuntu Condensed", Sans-Serif;
+  font-size: 15px;
+  line-height: 21px;
+  font-weight: 400;
+  color: #68ac3e;
+  cursor: pointer;
+  padding: 13px 5px 5px;
+  text-transform: uppercase;
+  &:hover {
+    background-color: #EEEEEE;
+  }
+}
+.view-news-block-left__content {
+  padding: 20px 15px;
+}
+.view-news-block-left__row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+.view-news-block-left__item-created {
+  width: 40px;
+  margin-right: 5px;
+}
+.view-news-block-left__item-created-content {
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+}
+.view-news-block-left__item-title {
+  width: 100%;
+}
+.view-news-block-left__item-title-content {
+  a {
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    &:hover {
+      color: #68ac3e;
+    }
+  }
+}

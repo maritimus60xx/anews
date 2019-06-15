@@ -1,0 +1,175 @@
+.app__content {
+  width: 100%;
+  max-width: 970px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 15px;
+  background-color: #fafafa;
+}
+.region-content {
+  width: 100%;
+  padding: 20px 15px;
+}
+
+// прибираєм сповіщення про відсутність контенту..
+
+.view-frontpage-page-1__content--empty,
+.view-frontpage-page-1__feed-icons {
+  display: none;
+}
+
+//сторінка новини
+
+.block-news-page-title__content {
+  border-bottom: 2px solid #68ac3e;
+  margin-bottom: 25px;
+  h1 {
+    font-family: "Ubuntu Condensed", Sans-Serif;
+    font-size: 28px;
+    line-height: 40px;
+    font-weight: 400;
+    color: #68ac3e;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+}
+.quickedit-field {
+
+}
+.js-quickedit-page-title {
+  font-family: "Ubuntu Condensed", Sans-Serif;
+  font-size: 28px;
+  line-height: 40px;
+  font-weight: 400;
+  color: #68ac3e;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.view-news-page-news__content {
+  .cols-0 tbody tr {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    &:hover {
+      background: none;
+    }
+  }
+  .cols-0 tbody tr td {
+    border-collapse: collapse;
+    border: none;
+  }
+  .views-field-field-image {
+    width: 100%;
+    padding: 0;
+    //min-width: 136px;
+    max-width: 136px;
+    //height: 84px;
+    padding: 0;
+    margin-top: 8px;
+    img {
+      max-width: 136px;
+      min-width: 136px;
+      height: 84px;
+      margin: 0;
+    }
+  }
+  .views-field-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ff9a39;
+    padding-left: 30px;
+    //padding-top: 5px;
+    a {
+      font-size: 18px;
+      line-height: 20px;
+      font-weight: 500;
+      color: #69ab2f;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    p {
+      font-size: 14px;
+      line-height: 20px;
+      color: #333333;
+      font-weight: 400;
+    }
+  }
+
+}
+
+
+/************************стилі для сторінок пунктів меню************************/
+
+.view-news-articles-page__content,
+.view-news-page-investigation__content,
+.view-news-page-sales__content,
+.view-news-page-health__content,
+.view-news-page-lifestyle__content {
+  .cols-0 tbody tr {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    &:hover {
+      background: none;
+    }
+  }
+  .cols-0 tbody tr td {
+    border-collapse: collapse;
+    border: none;
+  }
+  .views-field-field-image {
+    width: 100%;
+    padding: 0;
+    //min-width: 136px;
+    max-width: 136px;
+    //height: 84px;
+    padding: 0;
+    margin-top: 8px;
+    img {
+      max-width: 136px;
+      min-width: 136px;
+      height: 84px;
+      margin: 0;
+    }
+  }
+  .views-field-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ff9a39;
+    padding-left: 30px;
+    //padding-top: 5px;
+    a {
+      font-size: 18px;
+      line-height: 20px;
+      font-weight: 500;
+      color: #69ab2f;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    p {
+      font-size: 14px;
+      line-height: 20px;
+      color: #333333;
+      font-weight: 400;
+    }
+  }
+}

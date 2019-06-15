@@ -27,6 +27,7 @@
 @import "ui/views-mini-pager";
 
 // Form.
+@import "form/search-block-form";
 
 // Layout.
 @import "layout/app";
@@ -34,13 +35,27 @@
 @import "layout/region-header";
 @import "layout/region-content";
 @import "layout/region-footer";
+@import "layout/content-custom";
 
 // Theme (hook_theme).
 
 // Block.
+@import "block/main-menu";
+@import "block/left-sidebar";
+@import "block/block-right-sidebar";
+@import "block/block-main-page";
+@import "block/top-news-block";
+@import "block/pages-numbers";
 
 // Views.
 
 // Node.
 
+// Snippet.
+@import "snippet/header-main";
+@import "snippet/footer-main";
+
 // Taxonomy term.
+
+// Paragraphs
+@import "paragraph/paragraphs";

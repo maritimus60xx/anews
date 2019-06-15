@@ -1,3 +1,30 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none; }
+
+body {
+  background-color: #eeeeef; }
+
+ul {
+  list-style: none; }
+*,
+*:after,
+*:before {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none; }
+
+body {
+  background-color: #eeeeef; }
+
+ul {
+  list-style: none; }
+
 * {
   box-sizing: border-box;
   min-width: 0; }
@@ -24,7 +51,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   background: #ffffff;
-  font-family: "Roboto", sans-serif;
+  font-family: "Helvetica", sans-serif;
   color: #202124; }
 
 p {

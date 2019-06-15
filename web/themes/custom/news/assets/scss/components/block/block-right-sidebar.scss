@@ -1,0 +1,52 @@
+.region-sidebar-second {
+  max-width: 320px;
+  min-width: 320px;
+}
+.views-block-news-block-right {
+  margin-top: 30px;
+  max-height: 1480px;
+  box-shadow: 0 0 8px 1px #CCCCCC;
+}
+.views-block-news-block-right__title {
+  width: 100%;
+  border-bottom: 2px solid #68ac3e;
+  font-family: "Ubuntu Condensed", Sans-Serif;
+  font-size: 15px;
+  line-height: 21px;
+  font-weight: 400;
+  color: #68ac3e;
+  cursor: pointer;
+  padding: 24px 5px 5px;
+  text-transform: uppercase;
+}
+.view-news-block-right__content {
+  padding: 20px 15px;
+}
+.view-news-block-right__row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+.view-news-block-right__item-created {
+  width: 40px;
+  margin-right: 5px;
+}
+.view-news-block-right__item-created-content {
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+}
+.view-news-block-right__item-title {
+  width: 100%;
+}
+.view-news-block-right__item-title-content {
+  a {
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    &:hover {
+      color: #68ac3e;
+    }
+  }
+}

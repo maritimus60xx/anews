@@ -1,3 +1,30 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none; }
+
+body {
+  background-color: #eeeeef; }
+
+ul {
+  list-style: none; }
+*,
+*:after,
+*:before {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none; }
+
+body {
+  background-color: #eeeeef; }
+
+ul {
+  list-style: none; }
+
 .visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);

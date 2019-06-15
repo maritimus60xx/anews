@@ -1,0 +1,23 @@
+.block-main__menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0;
+  background-color: #f0f0f0;
+  list-style: none ;
+  padding: 0 15px;
+}
+.block-main__menu-item {
+  border-right: 1px solid #c6c6c6;
+}
+.block-main__menu-item:first-child {
+  border-left: 1px solid #c6c6c6;
+}
+.block-main__menu-item-link {
+  padding: 4px 12px;
+  color: #000000;
+  &:hover {
+    color: #68ac3e;
+  }
+}
+
