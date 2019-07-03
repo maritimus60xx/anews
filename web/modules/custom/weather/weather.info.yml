@@ -1,0 +1,5 @@
+name: Weather
+description: Custom module for learning Drupal 8
+type: module
+core: 8.x
+package: Weather

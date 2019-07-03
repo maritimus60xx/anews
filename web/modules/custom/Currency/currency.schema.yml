@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Функции установки и удаления модуля Украинские курсы валют.
+ */
+
+
+/**
+ * Создаю новую таблицу в БД.
+ */
+function ua_courses_schema() {
+  $schema['ua_courses'] = array(
+    'fields' => array(
+      'id' => array('type' => 'serial', 'not null' => TRUE),
+      'usd' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE),
+      'eur' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE),
+      'rub' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE),
+      'change_usd' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE),
+      'change_eur' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE),
+      'change_rub' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE)
+    ),
+   'primary key' => array('id'),
+  );
+  return $schema;
+}
+
+
+/**
+ * Вношу первичные данные в таблицу.
+ */
+function ua_courses_install() {
+	db_insert('ua_courses')->fields(array('usd' => 0,'eur' => 0,'rub' => 0, 'change_usd' => 0,'change_eur' => 0,'change_rub' => 0))->execute();
+}
+
+
+/**
+ * Удаляю таблицу при отключении модуля.
+ */
+function ua_courses_uninstall() {
+	db_drop_table('ua_courses');
+}

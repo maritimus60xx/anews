@@ -13,6 +13,14 @@ libraries:
   - news/style.utilities
 regions:
   content: Content
+  block_content: 'Blog-content'
+  block_blog: 'Blog-area'
+  block_article: 'Blog-article'
+  block_investigation: 'BLock-Investigation'
+  block_sales: 'Block-sales'
+  block_lifestyle: 'Block-lifestyle'
+  block_health: 'Block-health'
+  block_construction: 'Block-construction'
   sidebar_first: 'Sidebar first'
   sidebar_second: 'Sidebar second'
 

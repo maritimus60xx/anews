@@ -5,6 +5,13 @@
     margin-right: auto;
     margin-left: auto;
   }
+  &__top-sidebar {
+    padding-top: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #f0f0f0;
+  }
   &__bar {
     display: flex;
     justify-content: space-between;
@@ -22,5 +29,18 @@
     color: #ffffff;
     font-size: 16px;
     line-height: 23px;
+  }
+}
+.block-account__menu {
+  .block-account__menu-item-link {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #ffffff;
+    font-family: "Ubuntu Condensed", sans-serif;
+    &:hover {
+      color: #ff9a39;
+      text-decoration: underline;
+    }
   }
 }

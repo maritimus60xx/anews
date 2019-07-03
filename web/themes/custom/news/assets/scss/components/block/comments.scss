@@ -1,0 +1,107 @@
+
+.node-post-full__field-tags {
+  margin-bottom: 60px;
+  position: relative;
+  &::after {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    content: "Коментарі:";
+    display: block;
+    width: 100%;
+    border-bottom: 2px solid #69ac3f;
+    font-size: 16px;
+    font-family: "Ubuntu Condensed", Sans-Serif;
+    line-height: 23px;
+    color: #69ac3f;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+  }
+}
+.node-post-full__field-comments-content {
+  padding-top: 1px;
+}
+.node-post-full__field-comments {
+  .node-post-full__field-comments-title {
+    display: none;
+  }
+  .comment-comment__content {
+    margin-top: 25px;
+    .comment-comment__title {
+      display: none;
+    }
+    .comment-comment__comment-body {
+      margin-top: -30px;
+      margin-left: 70px;
+    }
+    .links--inline {
+      margin-left: 70px;
+      .links__item-link {
+        font-size: 13px;
+        line-height: 19px;
+        color: #afbbc1;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        border-bottom: 1px dotted #afbbc1;
+        &:hover {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+  .group_user-comment {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .comment-comment__field-user-image-comment-label,
+    .comment-comment__field-date-comment-label,
+    .comment-comment__field-user-label {
+      display: none;
+    }
+    /************img edit *************/
+    .user-user-compact__user-picture {
+      a img {
+        width: 58px;
+        height: 58px;
+      }
+    }
+    /**************author edit************/
+    .comment-comment__field-user {
+      margin-left: 10px;
+      a {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #333333;
+      }
+    }
+
+    /***************date edit **************/
+    .comment-comment__field-date-comment {
+      margin-top: 2px;
+      margin-left: 5px;
+      font-size: 11px;
+      line-height: 20px;
+      font-family: "Ubuntu Condensed", sans-serif;
+      color: #ff9a39;
+    }
+
+    /*****************body comment edit*****************/
+    .comment-comment__comment-body {
+
+      .comment-comment__comment-body-item {
+        margin-left: 65px;
+        p {
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          color: #333333;
+        }
+      }
+    }
+  }
+  .comment-comment__footer {
+    display: none;
+  }
+}

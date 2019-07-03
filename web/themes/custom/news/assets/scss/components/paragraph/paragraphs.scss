@@ -47,6 +47,7 @@
 
 // labels - display: none
 
+.node-page-full__field-paragraphs-label,
 .node-post-full__field-paragraphs-label,
 .paragraph-image-and-text__field-img-label,
 .media-image__field-media-image-label,
@@ -156,4 +157,11 @@
       text-decoration: underline;
     }
   }
+}
+
+
+// прибираємо пояснення для Markdown
+
+.filter-guidelines {
+  display: none;
 }

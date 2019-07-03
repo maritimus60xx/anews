@@ -1,0 +1,324 @@
+.region-block-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 0px 20px 13px;
+}
+.region-block-article,
+.region-block-investigation,
+.region-block-sales,
+.region-block-lifestyle,
+.region-block-health,
+.region-block-construction {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px 0px 10px 13px;
+}
+
+
+
+/*************************************ЗАГОЛОВОК БЛОКУ СТАТТІ****************************************/
+
+.views-block-news-block-articles__title,
+.views-block-news-block-investigation__title,
+.views-block-news-block-articles-line__title,
+.views-block-news-block-investigation-line__title,
+.views-block-news-block-sales__title,
+.views-block-news-block-sales-line__title,
+.views-block-news-block-lifestyle__title,
+.views-block-news-block-lifestyle-line__title,
+.views-block-news-block-health__title,
+.views-block-news-block-health-line__title,
+.views-block-news-block-construction__title,
+.views-block-news-block-construction-line__title {
+  width: 100%;
+  border-bottom: 2px solid #68ac3e;
+  margin-bottom: 15px;
+  font-family: "Ubuntu Condensed", Sans-Serif;
+  font-size: 16px;
+  line-height: 23px;
+  font-weight: 400;
+  color: #68ac3e;
+  padding: 15px 5px 8px;
+  text-transform: uppercase;
+}
+.views-block-news-block-articles-line__title,
+.views-block-news-block-investigation-line__title,
+.views-block-news-block-sales-line__title,
+.views-block-news-block-lifestyle-line__title,
+.views-block-news-block-health-line__title,
+.views-block-news-block-construction-line__title {
+  color: #FAFAFA;
+}
+
+
+
+
+
+//**********************************Блок Статті - головний *****************************************/
+
+.views-block-news-block-articles,
+.views-block-news-block-investigation,
+.views-block-news-block-sales,
+.views-block-news-block-lifestyle,
+.views-block-news-block-health,
+.views-block-news-block-construction {
+  width: 293px;
+}
+
+// image edit
+
+.view-news-block-articles__item-field-image-content,
+.view-news-block-investigation__item-field-image-content,
+.view-news-block-sales__item-field-image-content,
+.view-news-block-lifestyle__item-field-image-content,
+.view-news-block-health__item-field-image-content,
+.view-news-block-construction__item-field-image-content {
+  img {
+    background-position: top center;
+    background-size: cover;
+    width: 288px;
+    height: 178px;
+  }
+}
+
+
+// title edit
+
+.view-news-block-articles__item-title,
+.view-news-block-investigation__item-title,
+.view-news-block-sales__item-title,
+.view-news-block-lifestyle__item-title,
+.view-news-block-health__item-title,
+.view-news-block-construction__item-title {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+.view-news-block-articles__item-title-content,
+.view-news-block-investigation__item-title-content,
+.view-news-block-sales__item-title-content,
+.view-news-block-lifestyle__item-title-content,
+.view-news-block-health__item-title-content,
+.view-news-block-construction__item-title-content {
+  a {
+    font-family: "Ubuntu Condensed", Sans-Serif;
+    font-size: 31px;
+    line-height: 34px;
+    color: #000000;
+    font-weight: 500;
+    &:hover {
+      color: #69ac3f;
+    }
+  }
+}
+
+// text anons
+
+.view-news-block-articles__item-body-content,
+.view-news-block-investigation__item-body-content,
+.view-news-block-sales__item-body-content,
+.view-news-block-lifestyle__item-body-content,
+.view-news-block-health__item-body-content,
+.view-news-block-construction__item-body-content {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+  }
+}
+
+//date
+
+.view-news-block-articles__item-created-content,
+.view-news-block-investigation__item-created-content,
+.view-news-block-sales__item-created-content,
+.view-news-block-lifestyle__item-created-content,
+.view-news-block-health__item-created-content,
+.view-news-block-construction__item-created-content {
+  font-size: 14px;
+  line-height: 20px;
+  color: #ff9a39;
+}
+
+// comments count
+
+.view-news-block-articles__item-comment-count {
+  margin-left: 171px;
+  .view-news-block-articles__item-comment-count-content {
+
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      top: 4px;
+      left: -17px;
+      position: absolute;
+      width: 12px;
+      height: 11px;
+      background-image: url("/sites/default/files/comments.png");
+      background-size: cover;
+      z-index: 2200;
+    }
+  }
+}
+
+.view-news-block-investigation__item-comment-count {
+  margin-left: 171px;
+  .view-news-block-investigation__item-comment-count-content {
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      top: 4px;
+      left: -17px;
+      position: absolute;
+      width: 12px;
+      height: 11px;
+      background-image: url("/sites/default/files/comments.png");
+      background-size: cover;
+      z-index: 2200;
+    }
+  }
+}
+
+.view-news-block-sales__item-comment-count {
+  margin-left: 171px;
+  .view-news-block-sales__item-comment-count-content {
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      top: 4px;
+      left: -17px;
+      position: absolute;
+      width: 12px;
+      height: 11px;
+      background-image: url("/sites/default/files/comments.png");
+      background-size: cover;
+      z-index: 2200;
+    }
+  }
+}
+.view-news-block-lifestyle__item-comment-count {
+  margin-left: 171px;
+  .view-news-block-lifestyle__item-comment-count-content {
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      top: 4px;
+      left: -17px;
+      position: absolute;
+      width: 12px;
+      height: 11px;
+      background-image: url("/sites/default/files/comments.png");
+      background-size: cover;
+      z-index: 2200;
+    }
+  }
+}
+.view-news-block-health__item-comment-count {
+  margin-left: 171px;
+  .view-news-block-health__item-comment-count-content {
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      top: 4px;
+      left: -17px;
+      position: absolute;
+      width: 12px;
+      height: 11px;
+      background-image: url("/sites/default/files/comments.png");
+      background-size: cover;
+      z-index: 2200;
+    }
+  }
+}
+.view-news-block-construction__item-comment-count {
+  margin-left: 171px;
+  .view-news-block-construction__item-comment-count-content {
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      top: 4px;
+      left: -17px;
+      position: absolute;
+      width: 12px;
+      height: 11px;
+      background-image: url("/sites/default/files/comments.png");
+      background-size: cover;
+      z-index: 2200;
+    }
+  }
+}
+
+
+
+/**************************************Блок Статті - лінійне представлення*************************/
+
+.views-block-news-block-articles-line,
+.views-block-news-block-investigation-line,
+.views-block-news-block-sales-line,
+.views-block-news-block-lifestyle-line,
+.views-block-news-block-health-line,
+.views-block-news-block-construction-line {
+  width: 300px;
+}
+.view-news-block-articles-line__content,
+.view-news-block-investigation-line__content,
+.view-news-block-sales-line__content,
+.view-news-block-lifestyle-line__content,
+.view-news-block-health-line__content,
+.view-news-block-construction-line__content {
+  padding-left: 30px;
+}
+
+//edit text-link
+
+.view-news-block-articles-line__row,
+.view-news-block-investigation-line__row,
+.view-news-block-sales-line__row,
+.view-news-block-lifestyle-line__row,
+.view-news-block-health-line__row,
+.view-news-block-construction-line__row {
+  margin-bottom: 15px;
+}
+.view-news-block-articles-line__item-title-content,
+.view-news-block-investigation-line__item-title-content,
+.view-news-block-sales-line__item-title-content,
+.view-news-block-lifestyle-line__item-title-content,
+.view-news-block-health-line__item-title-content,
+.view-news-block-construction-line__item-title-content {
+  a {
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    &:hover {
+      color: #69ac3f;
+    }
+  }
+}

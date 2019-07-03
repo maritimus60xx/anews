@@ -1,0 +1,75 @@
+.node-blog-full__content {
+
+  .custom_user {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    .node-blog-full__field-user {
+      margin-left: 20px;
+      a {
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #000000;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        &:hover {
+          text-decoration: underline;
+          color: #69ac3f;
+        }
+      }
+    }
+    .node-blog-full__field-user-label,
+    .node-blog-full__field-user-image-label {
+      display: none;
+    }
+    /********image user edit*******/
+    .user-user-compact__user-picture {
+
+      width: 75px;
+      height: 75px;
+      a {
+        img {
+          border-radius: 50%;
+          width: 75px;
+          height: 75px;
+        }
+      }
+    }
+  }
+  /*************************blog's image and text *******************/
+  .node-blog-full__field-image-label,
+  .node-blog-full__field-text-label {
+    display: none;
+  }
+
+  .node-blog-full__field-text {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333333;
+  }
+
+  /*************blog's paragraphs edit ***************/
+  .node-blog-full__field-paragraphs {
+    .node-blog-full__field-paragraphs-label {
+      display: none;
+    }
+  }
+}
+.node-blog-full__head {
+  .node-blog-full__submitted {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    span {
+
+      font-size: 16px;
+      line-height: 24px;
+      color: #ff9a39;
+      font-weight: 400;
+      font-family: "Ubuntu Condensed", Sans-Serif;
+    }
+  }
+}

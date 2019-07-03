@@ -1,0 +1,104 @@
+
+.region-block-blog {
+  padding: 0px 0px 20px 13px;
+  position: relative;
+  .more-link {
+    width: 60px;
+    margin-left: auto;
+    a {
+      font-size: 13px;
+      line-height: 19px;
+      font-weight: 600;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #3f3f3f;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+
+.views-block-blogs-block-blog-block__title {
+  width: 100%;
+  border-bottom: 2px solid #68ac3e;
+  margin-bottom: 15px;
+  font-family: "Ubuntu Condensed", Sans-Serif;
+  font-size: 16px;
+  line-height: 23px;
+  font-weight: 400;
+  color: #68ac3e;
+  padding: 15px 5px 8px;
+  text-transform: uppercase;
+}
+
+.view-blogs-block-blog-block__content {
+  padding: 20px 0 10px;
+  .cols-0 tbody {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  .cols-0 tbody tr {
+    &:hover {
+      background: none;
+    }
+    width: 33.3%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    //edit image
+
+    .views-field-uid {
+      padding: 0;
+      margin: 0;
+      min-width: 86px;
+      max-width: 86px;
+      .user-user-compact__user-picture {
+        width: 86px;
+        a img {
+          width: 86px;
+          height: 86px;
+          border-radius: 50%;
+        }
+      }
+    }
+    //edit text
+
+    .views-field-title {
+      padding: 0 1px;
+      margin-left: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      a:first-child {
+        font-size: 18px;
+        line-height: 20px;
+        font-weight: 500;
+        font-family: "Ubuntu Condensed", sans-serif;
+        margin-bottom: 5px;
+        color: #333333;
+      }
+      a:last-child {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #000000;
+        &:hover {
+          color: #69ac3f;
+        }
+      }
+    }
+  }
+
+
+
+
+
+  .cols-0 tbody tr td {
+     border-collapse: collapse;
+     border: none;
+   }
+}

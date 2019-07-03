@@ -1,0 +1,18 @@
+.view-archive-page-archive__list-title {
+  font-size: 16px;
+  line-height: 23px;
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #ff9a39;
+}
+.view-archive-page-archive__item-title-content a {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333333;
+  &:hover {
+    color: #69ac3f;
+    text-decoration: underline;
+  }
+}

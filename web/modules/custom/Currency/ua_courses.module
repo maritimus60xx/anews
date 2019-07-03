@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * Получаю курсы валют с xml файла.
+ */
+function ua_courses_insert() {
+	//запрашиваю файл
+	$file = simplexml_load_file("http://bank-ua.com/export/currrate.xml");
+	if ($file) { //проверяю файл на доступность далее парсим.
+		$valutes = array();
+		foreach ($file AS $el){
+    		$valutes[strval($el->char3)] = strval($el->rate);
+    		$valutes_change[strval($el->code)] = strval($el->change);
+		}
+		//обрабатываю полученные результаты USD
+		$hasusd = floatval($valutes['USD']) / 100;
+		$courses_usd = number_format($hasusd,2);	
+		$usd_change = $valutes_change['840'];	
+		
+		//обрабатываю полученные результаты EUR
+		$haseur = floatval($valutes['EUR']) / 100;
+		$courses_eur = number_format($haseur,2);		
+		$eur_change = $valutes_change['978'];	
+		
+		//обрабатываю полученные результаты RUB
+		$hasrub = floatval($valutes['RUB'] / 10);
+		$courses_rub = number_format($hasrub,2);		
+		$rub_change = $valutes_change['643'];	
+				
+		//готовлю полученные данные для занесения в таблицу
+		db_update('ua_courses')->fields(array('usd' => $courses_usd, 'change_usd' => $usd_change, 'eur' => $courses_eur, 'change_eur' => $eur_change, 'rub' => $courses_rub, 'change_rub' => $rub_change))->execute();
+	}
+}
+
+/**
+ * Обнавляю данные в таблице при запуске Крон.
+ */
+function ua_courses_cron() {
+	ua_courses_insert();
+}
+
+/**
+ * Создаю новый блок в админке для вывода курсов.
+ */
+function ua_courses_block_info() {
+	$blocks = array();
+	$blocks[0]['info'] = t('Ukrainian courses');
+	$blocks[0]['cache'] = DRUPAL_NO_CACHE;   
+	return $blocks;
+}
+
+/**
+ * Оприделяю что выводить в новом блоке.
+ */
+function ua_courses_block_view($delta = '') {   
+    $query = db_select('ua_courses', 'u');
+	$query->fields('u', array('usd', 'eur', 'rub', 'change_usd', 'change_eur', 'change_rub'));	
+	$result = $query->execute();
+        while($record = $result->fetchAssoc()) {
+			//print_r($record);
+            $usd = $record['usd'];
+            $eur = $record['eur']; 
+            $rub = $record['rub'];
+            $usdch = $record['change_usd'];
+            $eurch = $record['change_eur'];
+			$rubch = $record['change_rub'];
+    }	
+    $blocks = array();
+    $blocks['subject'] = t('Currency Rates');
+    $blocks['content'] =  theme('courses_block', array('usd' => $usd, 'eur' => $eur,'rub' => $rub,'usdch' => $usdch, 'eurch' => $eurch, 'rubch' => $rubch));
+    return $blocks;
+}
+
+/**
+ * Регистрирую темплейт-файл блока.
+ */
+function ua_courses_theme() {     
+	return array(
+		'courses_block' => array(
+            'template' => 'courses_block',
+        )
+    );
+}

@@ -1,3 +1,12 @@
+.custom-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
 .app__content {
   width: 100%;
   max-width: 970px;
@@ -11,8 +20,10 @@
 }
 .region-content {
   width: 100%;
-  padding: 20px 15px;
+  padding: 20px 13px;
 }
+
+
 
 // прибираєм сповіщення про відсутність контенту..
 
@@ -21,7 +32,7 @@
   display: none;
 }
 
-//сторінка новини
+/****************************сторінка НОВИНИ***********************************/
 
 .block-news-page-title__content {
   border-bottom: 2px solid #68ac3e;
@@ -36,9 +47,7 @@
     text-transform: uppercase;
   }
 }
-.quickedit-field {
 
-}
 .js-quickedit-page-title {
   font-family: "Ubuntu Condensed", Sans-Serif;
   font-size: 28px;
@@ -51,7 +60,7 @@
 .view-news-page-news__content {
   .cols-0 tbody tr {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 10px;
     &:hover {
@@ -65,10 +74,7 @@
   .views-field-field-image {
     width: 100%;
     padding: 0;
-    //min-width: 136px;
     max-width: 136px;
-    //height: 84px;
-    padding: 0;
     margin-top: 8px;
     img {
       max-width: 136px;
@@ -86,7 +92,8 @@
     line-height: 20px;
     color: #ff9a39;
     padding-left: 30px;
-    //padding-top: 5px;
+    width: 440px;
+    margin-bottom: 20px;
     a {
       font-size: 18px;
       line-height: 20px;
@@ -105,7 +112,25 @@
       font-weight: 400;
     }
   }
-
+  .views-field-comment-count {
+    margin-top: auto ;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      top: 10px;
+      left: -13px;
+      position: absolute;
+      width: 12px;
+      height: 11px;
+      background-image: url("/sites/default/files/comments.png");
+      background-size: cover;
+      z-index: 2200;
+    }
+  }
 }
 
 
@@ -135,7 +160,6 @@
     //min-width: 136px;
     max-width: 136px;
     //height: 84px;
-    padding: 0;
     margin-top: 8px;
     img {
       max-width: 136px;
@@ -153,7 +177,8 @@
     line-height: 20px;
     color: #ff9a39;
     padding-left: 30px;
-    //padding-top: 5px;
+    width: 440px;
+    margin-bottom: 20px;
     a {
       font-size: 18px;
       line-height: 20px;
@@ -170,6 +195,25 @@
       line-height: 20px;
       color: #333333;
       font-weight: 400;
+    }
+  }
+  .views-field-comment-count {
+    margin-top: auto ;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      top: 10px;
+      left: -13px;
+      position: absolute;
+      width: 12px;
+      height: 11px;
+      background-image: url("/sites/default/files/comments.png");
+      background-size: cover;
+      z-index: 2200;
     }
   }
 }

@@ -1,0 +1,254 @@
+@media screen and (max-width: 942px) {
+  .app__content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .region-sidebar-first,
+  .region-sidebar-second {
+    width: 100%;
+    max-width: 945px;
+  }
+  //edit news page
+
+  .view-news-page-news__content .views-field-body,
+  .view-news-articles-page__content .views-field-body,
+  .view-news-page-investigation__content .views-field-body,
+  .view-news-page-sales__content .views-field-body,
+  .view-news-page-health__content .views-field-body,
+  .view-news-page-lifestyle__content .views-field-body {
+    width: 100%;
+  }
+  .custom-container {
+    align-items: center;
+  }
+  .region-content {
+    width: 100%;
+    max-width: 620px;
+  }
+  .view-news-block-main-page__content {
+    justify-content: center;
+  }
+  .block-system-branding-block {
+    min-width: 140px;
+  }
+  .block-main__menu {
+    flex-direction: column;
+  }
+  .block-main__menu-item,
+  .block-main__menu-item:first-child {
+    border: none;
+  }
+  .header__top-sidebar {
+    justify-content: center !important;
+  }
+  .views-block-news-block-top-sidebar {
+    display: none;
+  }
+}
+@media screen and (max-width: 700px) {
+  .header__bar {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .header__date {
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+  .block-account__menu {
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .block-account__menu-item {
+    margin-bottom: 10px;
+  }
+  .block-main__menu {
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 610px) {
+  .region-block-content {
+   flex-direction: column;
+   align-items: center;
+  }
+  .region-block-article,
+  .region-block-investigation,
+  .region-block-sales,
+  .region-block-lifestyle,
+  .region-block-health,
+  .region-block-construction {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .views-block-news-block-articles,
+  .views-block-news-block-investigation,
+  .views-block-news-block-sales,
+  .views-block-news-block-lifestyle,
+  .views-block-news-block-health,
+  .views-block-news-block-construction {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .views-block-news-block-articles__content,
+  .views-block-news-block-investigation__content,
+  .views-block-news-block-sales__content,
+  .views-block-news-block-lifestyle__content,
+  .views-block-news-block-health__content,
+  .views-block-news-block-construction__content {
+    width: 293px;
+  }
+  .views-block-news-block-articles-line,
+  .views-block-news-block-investigation-line,
+  .views-block-news-block-sales-line,
+  .views-block-news-block-lifestyle-line,
+  .views-block-news-block-health-line,
+  .views-block-news-block-construction-line {
+    width: 100%;
+    max-width: 443px;
+  }
+  .view-news-block-articles-line__content,
+  .view-news-block-investigation-line__content,
+  .view-news-block-sales-line__content,
+  .view-news-block-lifestyle-line__content,
+  .view-news-block-health-line__content,
+  .view-news-block-construction-line__content {
+    padding-left: 0;
+  }
+  .views-block-news-block-articles-line__title,
+  .views-block-news-block-investigation-line__title,
+  .views-block-news-block-sales-line__title,
+  .views-block-news-block-lifestyle-line__title,
+  .views-block-news-block-health-line__title,
+  .views-block-news-block-construction-line__title {
+    border: none;
+  }
+  .view-blogs-blog-page__content .cols-0 tbody {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .view-blogs-blog-page__content .cols-0 tbody tr {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .view-blogs-block-blog-block__content .cols-0 tbody {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .view-blogs-block-blog-block__content .cols-0 tbody tr {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .block-footer__menu {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .block-footer__menu-item {
+    margin-bottom: 10px;
+  }
+  .block-footer__menu {
+    margin: 0;
+    width: 100% !important;
+  }
+  .footer__social {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .footer__social-link {
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 475px) {
+  .region-content {
+    padding: 20px 0;
+  }
+  .view-news-page-news__content .views-field-body,
+  .view-news-articles-page__content .views-field-body,
+  .view-news-page-investigation__content .views-field-body,
+  .view-news-page-sales__content .views-field-body,
+  .view-news-page-health__content .views-field-body,
+  .view-news-page-lifestyle__content .views-field-body {
+    padding-left: 15px;
+    font-size: 11px;
+  }
+  .view-news-page-news__content .views-field-body a,
+  .view-news-articles-page__content .views-field-body a,
+  .view-news-page-investigation__content .views-field-body a,
+  .view-news-page-sales__content .views-field-body a,
+  .view-news-page-health__content .views-field-body a,
+  .view-news-page-lifestyle__content .views-field-body a {
+    font-size: 15px;
+  }
+  .view-news-page-news__content .views-field-body p,
+  .view-news-articles-page__content .views-field-body p,
+  .view-news-page-investigation__content .views-field-body p,
+  .view-news-page-sales__content .views-field-body p,
+  .view-news-page-health__content .views-field-body p,
+  .view-news-page-lifestyle__content .views-field-body p {
+    font-size: 13px;
+  }
+}
+@media screen and (max-width: 430px) {
+  .header__bar {
+    padding: 0 !important;
+  }
+  .form-search-block-form {
+    flex-direction: column;
+  }
+  .form-search-block-form__keys {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 390px) {
+  .region-block-content {
+    padding: 20px 0;
+  }
+  .view-news-top-news-block__content .views-field-title {
+    font-size: 11px;
+  }
+  .view-news-top-news-block__content .views-field-title a {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .view-news-top-news-block__content .views-field-field-image {
+    min-width: 120px;
+    max-width: 120px;
+  }
+  .view-news-top-news-block__content .views-field-field-image img {
+    max-width: 110px;
+    min-width: 110px;
+    height: 74px;
+  }
+  .view-news-page-news__content .views-field-field-image,
+  .view-news-articles-page__content .views-field-field-image,
+  .view-news-page-investigation__content .views-field-field-image,
+  .view-news-page-sales__content .views-field-field-image,
+  .view-news-page-health__content .views-field-field-image,
+  .view-news-page-lifestyle__content .views-field-field-image {
+    max-width: 110px;
+  }
+  .view-news-page-news__content .views-field-field-image img,
+  .view-news-articles-page__content .views-field-field-image img,
+  .view-news-page-investigation__content .views-field-field-image img,
+  .view-news-page-sales__content .views-field-field-image img,
+  .view-news-page-health__content .views-field-field-image img,
+  .view-news-page-lifestyle__content .views-field-field-image img {
+    max-width: 110px;
+    min-width: 110px;
+    height: 74px;
+  }
+}

@@ -4,9 +4,18 @@
 
   <main{{ main_layout_attributes.addClass(bem_block ~ '__content') }}>
     {{ page.sidebar_first }}
-    {{ page.content }}
+    <div class="custom-container">
+      {{ page.content }}
+      {{ page.block_content }}
+      {{ page.block_blog }}
+      {{ page.block_article }}
+      {{ page.block_investigation }}
+      {{ page.block_sales }}
+      {{ page.block_lifestyle }}
+      {{ page.block_health }}
+      {{ page.block_construction }}
+    </div>
     {{ page.sidebar_second }}
   </main>
-
   {{ snippet ('footer_main') }}
 </div>

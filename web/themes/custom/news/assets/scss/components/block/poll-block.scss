@@ -1,0 +1,85 @@
+
+
+// block design custom
+
+.views-block-poll-list-block-polls {
+  width: 258px;
+  padding: 0;
+  background-color: #ecf3e9;
+  margin-left: 10px;
+}
+.views-block-poll-list-block-polls__title {
+  width: 100%;
+  border-bottom: 2px solid #68ac3e;
+  margin-bottom: 25px;
+  font-family: "Ubuntu Condensed", Sans-Serif;
+  font-size: 16px;
+  line-height: 23px;
+  font-weight: 400;
+  color: #68ac3e;
+  padding: 15px 5px 8px;
+  text-transform: uppercase;
+}
+
+
+
+// poll design
+
+.poll {
+  padding-left: 13px;
+  .bar {
+    background-color: #ecf3e9;
+    height: 10px;
+    border-radius: 2px;
+    .foreground {
+      height: 10px;
+      border-radius: 2px;
+      background-color: #69AB2E;
+    }
+  }
+  .total {
+    text-align: left;
+    font-size: 14px;
+    line-height: 20px;
+    color: #272824;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-bottom: 20px;
+  }
+}
+.poll-question {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #272824;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.choice-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  .title-title {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #272824;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 170px;
+  }
+}
+.percent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.percent-percent,
+.value-value {
+  font-size: 14px;
+  line-height: 20px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #a3b0b8;
+}
+.percent-percent {
+  margin-right: 2px;
+}
+
+

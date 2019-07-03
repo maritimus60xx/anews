@@ -30,7 +30,6 @@
 //початок лівого блоку з новинами
 
 .views-block-news-block-left {
-  max-height: 1480px;
   box-shadow: 0 0 8px 1px #CCCCCC;
 }
 .views-block-news-block-left__title {
@@ -48,17 +47,48 @@
     background-color: #EEEEEE;
   }
 }
-.view-news-block-left__content {
-  padding: 20px 15px;
+.views-block-news-block-left__content {
+  padding-left: 15px;
+  padding-right: 15px;
 }
-.view-news-block-left__row {
+.view-news-block-left__content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  max-height: 1280px;
+  overflow: auto;
+
+}
+
+.view-news-block-left__list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.view-news-block-left__list-title {
+  width: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  color: #ff9a39;
+  border-bottom: 1px solid #9f9f9f;
+}
+.view-news-block-left__list {
+  margin: 0;
+}
+.view-news-block-left__list-item {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   margin-bottom: 15px;
 }
+
 .view-news-block-left__item-created {
-  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
   margin-right: 5px;
 }
 .view-news-block-left__item-created-content {
