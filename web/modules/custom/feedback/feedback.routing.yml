@@ -1,0 +1,23 @@
+feedback.content:
+  path: '/feedback'
+  defaults:
+    _controller: 'Drupal\feedback\Controller\FeedbackController::content'
+    _title: 'Feedback'
+  requirements:
+    _permission: 'access content'
+
+feedback.admin_settings:
+  path: 'admin/config/content/feedback'
+  defaults:
+    _form: '\Drupal\feedback\Form\FeedbackSettingsForm'
+    _title: 'Feedback Settings'
+  requirements:
+    _permissions: 'administer feedback'
+
+feedback.report:
+  path: '/admin/reports/feedback'
+  defaults:
+    _controller: '\Drupal\feedback\Controller\ReportController::report'
+    _title: 'List of Feedback'
+  requirements:
+    _permission: 'view feedback'

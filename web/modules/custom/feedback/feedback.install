@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ * Installation functions for fee module.
+ */
+
+use Drupal\user\RoleInterface;
+
+/**
+ * Implements hook_schema().
+ */
+function feedback_schema () {
+  $schema['feedback'] = array(
+    'description' => 'table for my custom module',
+    'fields' => array(
+      'feedback_id' => array(
+        'description' => 'id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'The {users} .uid that added this feedback.',
+         'type' => 'int',
+         'not null' => TRUE,
+         'default' => 0,
+      ),
+#       'nid' => array(
+#         'description' => 'The {node} .nid for this feedback.',
+#         'type' => 'varchar',
+#         'length' => '64',
+#         'not null' => FALSE,
+#         'default' => 0,
+#       ),
+      'name' => array(
+        'description' => 'name user',
+        'type' => 'varchar',
+        'length' => '64',
+        'not null' => TRUE,
+      ),
+      'email' => array(
+        'description' => 'email user',
+        'type' => 'varchar',
+        'length' => '64',
+        'not null' => TRUE,
+      ),
+      'message' => array(
+        'description' => 'feedback user*s',
+        'type' => 'text',
+        'length' => '512',
+        'not null' => TRUE,
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Timestamp for when feedback was created.',
+      ),
+    ),
+    'primary key' => array('feedback_id'),
+#     'indexes' => array(
+#       'node' => array('nid'),
+#       'node_user' => array('nid', 'uid'),
+#     ),
+  );
+#   $schema['feedback_enabled'] = array(
+#     'description' => 'Tracks whether feedback is enabled for a node.',
+#     'fields' => array(
+#       'nid' => array(
+#         'description' => 'The {node} .nid that has feedback enabled.',
+#         'type' => 'int',
+#         'not null' => TRUE,
+#         'default' => 0,
+#       ),
+#     ),
+#     'primary key' => array('nid'),
+#   );
+  return $schema;
+}
+

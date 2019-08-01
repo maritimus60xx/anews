@@ -1,0 +1,39 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function feedback_help ($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.feedback':
+      return t('
+        <h1>my first hook</h1>
+      ');
+  }
+}
+
+
+/**
+ * insert values in the database
+ */
+
+//  $name = $_POST['user_name'];
+//  $email = $_POST['user_email'];
+//  $feedback = $_POST['user_feedback'];
+//
+//  $query = \Drupal::database()->insert('feedback');
+//  $query->fields(array(
+//    'name',
+//    'email',
+//    'feedback',
+//    'datetime',
+//  ));
+//  $query->values(array(
+//    $name,
+//    $email,
+//    $feedback,
+//    time(),
+//  ));
+//  $query->execute();

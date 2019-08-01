@@ -52,6 +52,7 @@
         "drupal/robotstxt": "^1.2",
         "drupal/rules": "^3.0@alpha",
         "drupal/scheduler": "^1.0",
+        "drupal/schema": "1.x-dev",
         "drupal/scrollbar": "^1.0",
         "drupal/snippet_manager": "^1.7",
         "drupal/swiftmailer": "^1.0@beta",

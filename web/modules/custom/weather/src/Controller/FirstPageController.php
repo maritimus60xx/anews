@@ -20,7 +20,7 @@ class FirstPageController {
    */
   public function content() {
     $element = array(
-      '#markup' => 'Hello World!',
+      '#markup' => 'hello world',
     );
     return $element;
   }
@@ -38,3 +38,5 @@ class FirstPageController {
   }
 
 }
+?>
+
