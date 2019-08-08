@@ -26,8 +26,6 @@ class FeedbackForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state)
   {
-//    $node = \Drupal::routeMatch()-> getParameter('node');
-//    $nid = $node->nid->value;
     $form['name'] = array(
       '#title' => t('Your Name'),
       '#type' => 'textfield',
@@ -42,7 +40,7 @@ class FeedbackForm extends FormBase {
     );
     $form['message'] = array(
       '#title' => t('Your Message'),
-      '#type' => 'textfield',
+      '#type' => 'textarea',
       '#required' => TRUE
     );
     $form['actions']['#type'] = 'actions';
@@ -50,10 +48,6 @@ class FeedbackForm extends FormBase {
       '#type' => 'submit',
       '#value' => t('Send')
     );
-//    $form['nid'] = array(
-//      '#type' => 'hidden',
-//      '#value' => $nid,
-//    );
     return $form;
   }
 
@@ -82,7 +76,6 @@ class FeedbackForm extends FormBase {
     $query->fields([
       'name' => $form_state -> getValue('name'),
       'email' => $form_state -> getValue('email'),
-//      'nid' => $form_state -> getValue('nid'),
       'message' => $form_state -> getValue('message'),
       'uid' => $user -> id(),
       'created' => time(),

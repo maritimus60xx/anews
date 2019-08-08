@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Installation functions for fee module.
+ * Installation functions for feedback module.
  */
 
 use Drupal\user\RoleInterface;
@@ -25,13 +25,6 @@ function feedback_schema () {
          'not null' => TRUE,
          'default' => 0,
       ),
-#       'nid' => array(
-#         'description' => 'The {node} .nid for this feedback.',
-#         'type' => 'varchar',
-#         'length' => '64',
-#         'not null' => FALSE,
-#         'default' => 0,
-#       ),
       'name' => array(
         'description' => 'name user',
         'type' => 'varchar',
@@ -57,24 +50,7 @@ function feedback_schema () {
         'description' => 'Timestamp for when feedback was created.',
       ),
     ),
-    'primary key' => array('feedback_id'),
-#     'indexes' => array(
-#       'node' => array('nid'),
-#       'node_user' => array('nid', 'uid'),
-#     ),
   );
-#   $schema['feedback_enabled'] = array(
-#     'description' => 'Tracks whether feedback is enabled for a node.',
-#     'fields' => array(
-#       'nid' => array(
-#         'description' => 'The {node} .nid that has feedback enabled.',
-#         'type' => 'int',
-#         'not null' => TRUE,
-#         'default' => 0,
-#       ),
-#     ),
-#     'primary key' => array('nid'),
-#   );
   return $schema;
 }
 
