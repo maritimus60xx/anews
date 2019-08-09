@@ -37,7 +37,7 @@ class FeedbackSettingsForm extends ConfigFormBase {
       '#type' => 'checkbox',
       '#title' => $this -> t('Allow users to resubmit the form'),
       '#default_value' => $config -> get('allowed_value'),
-      '#description' => $this -> t('The user will be able to send an unlimited number.'),
+      '#description' => $this -> t('User will be able to submit the form an unlimited number.'),
     );
 
     return parent::buildForm($form, $form_state);
@@ -48,8 +48,9 @@ class FeedbackSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state)
   {
     $config = $this -> config('feedback.settings');
-    $config -> set('allowed_value', $form_state -> getValue('allowed_value'));
-    $config -> save();
+    $config
+      -> set('allowed_value', $form_state -> getValue('allowed_value'))
+      -> save();
 
     parent::submitForm($form, $form_state);
   }

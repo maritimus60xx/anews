@@ -9,6 +9,7 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\User\Entity\User;
+use Drupal\Core\Config\ConfigFactory;
 
 /**
  * Provides an feedback form.
@@ -60,8 +61,22 @@ class FeedbackForm extends FormBase {
     if (strlen($form_state->getValue('name')) < 5) {
       $form_state->setErrorByName('name', $this->t('Name is too short.'));
     }
-    if (strlen($form_state->getValue('message')) < 10) {
+    if (strlen($form_state->getValue('message')) < 1) {
       $form_state->setErrorByName('message', $this->t('Message is too short.'));
+    }
+//    get value of config form
+//    $config = \Drupal::service('config.factory')->get('feedback.admin_settings');
+    $config = \Drupal::configFactory()->getEditable('feedback.settings');
+    $configuration = $config->get('allowed_value');
+//    get user's email
+    $email_now = $form_state->getValue('email');
+//    check email in the database
+    $query = \Drupal::database()->select('feedback', 'f');
+    $query->addField('f', 'email');
+    $email_db = $query->execute()->fetchCol();
+
+    if ($email_db[0] == $email_now && $configuration == 1 ) {
+      $form_state->setErrorByName('email', $this -> t('The email can not be use for form resubmit'));
     }
   }
 
