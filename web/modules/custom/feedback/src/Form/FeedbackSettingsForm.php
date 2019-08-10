@@ -35,9 +35,9 @@ class FeedbackSettingsForm extends ConfigFormBase {
     $config = $this -> config('feedback.settings');
     $form['allowed_value'] = array(
       '#type' => 'checkbox',
-      '#title' => $this -> t('Allow users to resubmit the form'),
+      '#title' => $this -> t('Prohibit resubmit the form'),
       '#default_value' => $config -> get('allowed_value'),
-      '#description' => $this -> t('User will be able to submit the form an unlimited number.'),
+      '#description' => $this -> t('User will not be able to submit the form an unlimited number.'),
     );
 
     return parent::buildForm($form, $form_state);
