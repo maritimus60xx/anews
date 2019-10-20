@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_help().
@@ -8,10 +9,6 @@ use Drupal\Core\Routing\RouteMatchInterface;
 function feedback_help ($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'help.page.feedback':
-      return t('
-        <h1>my first hook</h1>
-      ');
+      return t('my first hook');
   }
 }
-
-

@@ -63,12 +63,14 @@ class ReportController extends ControllerBase
     ];
 
 
-    $query = $this->database->select('feedback', 'f')
-      ->extend('Drupal\Core\Database\Query\TableSortExtender');
+    $query = $this->database->select('feedback', 'f');
     $query->fields('f');
+    $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')
+      ->orderByHeader($header);
+    $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')
+      ->limit(50);
 
-    $result = $query
-      ->orderByHeader($header)
+    $result = $pager
       ->execute();
 
     $rows = [];
@@ -95,6 +97,11 @@ class ReportController extends ControllerBase
       '#header' => $header,
       '#rows' => $rows,
     ];
+
+    //  Add the pager.
+    $build['pager'] = array(
+      '#type' => 'pager'
+    );
 
     return $build;
   }
