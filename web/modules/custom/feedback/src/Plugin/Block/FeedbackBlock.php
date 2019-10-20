@@ -6,8 +6,11 @@
 namespace Drupal\feedback\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormBuilderInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\User\Entity\User;
 
 /**
@@ -18,14 +21,43 @@ use Drupal\User\Entity\User;
  * )
  */
 
-class FeedbackBlock extends BlockBase {
+class FeedbackBlock extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * {@inheritdoc}
+   */
+  protected $formBuilder;
+
+  /**
+   * {@inheritDoc}
+   */
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $formBuilder) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->formBuilder = $formBuilder;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   */
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('form_builder')
+    );
+  }
+
+  /**
+   * {@inheritDoc}
    */
 
   public function build()
   {
-    return \Drupal::formBuilder() -> getForm('Drupal\feedback\Form\FeedbackForm');
+    $form = $this->formBuilder->getForm('Drupal\feedback\Form\FeedbackForm');
+    return $form;
   }
   public function blockAccess(AccountInterface $account)
   {

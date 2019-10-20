@@ -8,3 +8,5 @@ administer feedback:
   title: 'Administer Feedback settings'
   description: 'Access the Feedback administrative settings page.'
   restrict access: true
+access content overview:
+  title: 'Access the Feedback overview page'

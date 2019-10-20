@@ -1,55 +1,55 @@
 <?php
 
-/**
- * @file
- * Installation functions for feedback module.
- */
-
-use Drupal\user\RoleInterface;
-
-/**
- * Implements hook_schema().
- */
-function feedback_schema () {
-  $schema['feedback'] = array(
-    'description' => 'table for my custom module',
-    'fields' => array(
-      'feedback_id' => array(
-        'description' => 'id',
-        'type' => 'serial',
-        'not null' => TRUE,
-      ),
-      'uid' => array(
-        'description' => 'The {users} .uid that added this feedback.',
-         'type' => 'int',
-         'not null' => TRUE,
-         'default' => 0,
-      ),
-      'name' => array(
-        'description' => 'name user',
-        'type' => 'varchar',
-        'length' => '64',
-        'not null' => TRUE,
-      ),
-      'email' => array(
-        'description' => 'email user',
-        'type' => 'varchar',
-        'length' => '64',
-        'not null' => TRUE,
-      ),
-      'message' => array(
-        'description' => 'feedback user*s',
-        'type' => 'text',
-        'length' => '512',
-        'not null' => TRUE,
-      ),
-      'created' => array(
-        'type' => 'int',
-        'not null' => TRUE,
-        'default' => 0,
-        'description' => 'Timestamp for when feedback was created.',
-      ),
-    ),
-  );
-  return $schema;
-}
+# /**
+#  * @file
+#  * Installation functions for feedback module.
+#  */
+#
+# use Drupal\user\RoleInterface;
+#
+# /**
+#  * Implements hook_schema().
+#  */
+# function feedback_schema () {
+#   $schema['feedback'] = array(
+#     'description' => 'table for my custom module',
+#     'fields' => array(
+#       'feedback_id' => array(
+#         'description' => 'id',
+#         'type' => 'serial',
+#         'not null' => TRUE,
+#       ),
+#       'uid' => array(
+#         'description' => 'The {users} .uid that added this feedback.',
+#          'type' => 'int',
+#          'not null' => TRUE,
+#          'default' => 0,
+#       ),
+#       'name' => array(
+#         'description' => 'name user',
+#         'type' => 'varchar',
+#         'length' => '64',
+#         'not null' => TRUE,
+#       ),
+#       'email' => array(
+#         'description' => 'email user',
+#         'type' => 'varchar',
+#         'length' => '64',
+#         'not null' => TRUE,
+#       ),
+#       'message' => array(
+#         'description' => 'feedback user*s',
+#         'type' => 'text',
+#         'length' => '512',
+#         'not null' => TRUE,
+#       ),
+#       'created' => array(
+#         'type' => 'int',
+#         'not null' => TRUE,
+#         'default' => 0,
+#         'description' => 'Timestamp for when feedback was created.',
+#       ),
+#     ),
+#   );
+#   return $schema;
+# }

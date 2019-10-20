@@ -25,24 +25,36 @@ class FeedbackForm extends FormBase {
   /**
    * (@inheritdoc)
    */
-  public function buildForm(array $form, FormStateInterface $form_state)
-  {
+  public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $conn = Database::getConnection();
+    $record = array();
+    if (isset($_GET['num'])) {
+      $query = $conn->select('feedback', 'f')
+        ->condition('feedback_id', $_GET['num'])
+        ->fields('f');
+      $record = $query->execute()->fetchAssoc();
+    }
+
     $form['name'] = array(
       '#title' => t('Your Name'),
       '#type' => 'textfield',
       '#size' => 50,
-      '#required' => TRUE
+      '#required' => TRUE,
+      '#default_value' => (isset($record['name']) && $_GET['num']) ? $record['name']:'',
     );
     $form['email'] = array(
       '#title' => t('Your Email'),
       '#type' => 'email',
       '#size' => 25,
-      '#required' => TRUE
+      '#required' => TRUE,
+      '#default_value' => (isset($record['email']) && $_GET['num']) ? $record['email']:'',
     );
     $form['message'] = array(
       '#title' => t('Your Message'),
       '#type' => 'textarea',
-      '#required' => TRUE
+      '#required' => TRUE,
+      '#default_value' => (isset($record['message']) && $_GET['num']) ? $record['message']:'',
     );
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = array(
@@ -84,18 +96,39 @@ class FeedbackForm extends FormBase {
    * Start submit form
    * @inheritDoc
    */
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
-    $query = \Drupal::database()->insert('feedback');
-    $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
-    $query->fields([
-      'name' => $form_state -> getValue('name'),
-      'email' => $form_state -> getValue('email'),
-      'message' => $form_state -> getValue('message'),
-      'uid' => $user -> id(),
-      'created' => time(),
-    ]);
-    $query->execute();
-    drupal_set_message(t('Your message has been sent'));
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+
+
+    if (isset($_GET['num'])) {
+      $query = \Drupal::database();
+      $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+      $query->update('feedback')
+        ->fields([
+          'name' => $form_state -> getValue('name'),
+          'email' => $form_state -> getValue('email'),
+          'message' => $form_state -> getValue('message'),
+          'uid' => $user -> id(),
+          'created' => time(),
+        ])
+        ->condition('feedback_id', $_GET['num'])
+        ->execute();
+      drupal_set_message("Successfully changed");
+      $form_state->setRedirect('feedback.report');
+    }
+    else {
+      $query = \Drupal::database()->insert('feedback');
+      $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+      $query->fields([
+        'name' => $form_state -> getValue('name'),
+        'email' => $form_state -> getValue('email'),
+        'message' => $form_state -> getValue('message'),
+        'uid' => $user -> id(),
+        'created' => time(),
+      ]);
+      $query->execute();
+      drupal_set_message(t('Your message has been sent'));
+    }
+
+
   }
 }
