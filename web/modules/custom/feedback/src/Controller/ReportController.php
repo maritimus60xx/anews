@@ -9,15 +9,17 @@ namespace Drupal\feedback\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Link;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+
 
 /**
  * Controller routines for report routes.
  */
-class ReportController extends ControllerBase
-{
+class ReportController extends ControllerBase {
 
   /**
    * The Database Connection.
@@ -27,30 +29,46 @@ class ReportController extends ControllerBase
   protected $database;
 
   /**
-   * {@inheritdoc}
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
-  public static function create(ContainerInterface $container) {
-    $controller = new static(
-      $container->get('database')
-    );
-    $controller->setStringTranslation($container->get('string_translation'));
-    return $controller;
-  }
+  protected $requestStack;
+
+  /**
+   * @var \Drupal\Core\Form\FormBuilderInterface
+   */
+  protected $formBuilder;
 
   /**
    * ReportController constructor.
    *
    * @param \Drupal\Core\Database\Connection $database
-   *   The database connection.
+   *
+   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
+   *
+   * @param \Drupal\Core\Form\FormBuilderInterface $formBuilder
    */
-  public function __construct(Connection $database) {
+  public function __construct(Connection $database, RequestStack $request_stack, FormBuilderInterface $formBuilder) {
     $this->database = $database;
+    $this->requestStack = $request_stack;
+    $this->formBuilder = $formBuilder;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('database'),
+      $container->get('request_stack'),
+      $container->get('form_builder')
+    );
   }
 
   /**
    * A simple controller method to explain what the report is about.
    */
   public function description() {
+
     $header = [
       ['data' => $this->t('Feedback_id'), 'field' => 'f.feedback_id'],
       ['data' => $this->t('User_ID'), 'field' => 'f.uid'],
@@ -62,9 +80,19 @@ class ReportController extends ControllerBase
       ['data' => $this->t('Operation')],
     ];
 
+    $getFilterValue = $this->requestStack->getCurrentRequest()->query->get('filter');
 
-    $query = $this->database->select('feedback', 'f');
-    $query->fields('f');
+    if (isset($getFilterValue)) {
+      $get_value = $this->database->escapeLike($getFilterValue);
+      $query = $this->database->select('feedback', 'f');
+      $query->fields('f');
+      $query->condition('f.name', $get_value  . '%', 'LIKE');
+
+    } else {
+      $query = $this->database->select('feedback', 'f');
+      $query->fields('f');
+    }
+
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')
       ->orderByHeader($header);
     $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')
@@ -91,6 +119,10 @@ class ReportController extends ControllerBase
     }
 
     // Build the table.
+
+    $build['form'] = [
+      $form = $this->formBuilder->getForm('Drupal\feedback\Form\FeedbackFilterForm'),
+    ];
 
     $build['feedback_table'] = [
       '#theme' => 'table',

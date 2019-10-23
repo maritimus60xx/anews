@@ -2,23 +2,52 @@
 
 namespace Drupal\feedback\Form;
 
-use Drupal\Core\Form\FormBase;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Url;
-use Drupal\Core\Render\Element;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Class FormDelete.
  *
  * @package Drupal\feedback\Form
  */
 class FormDelete extends ConfirmFormBase {
+
+  /**
+   * The Database Connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * FormDelete constructor.
+   *
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database connection.
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $database = $container->get('database');
+    $controller = new static($database);
+    return $controller;
+  }
+
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
     return 'delete_form';
   }
+
   public $cid;
 
   public function getQuestion() {
@@ -61,7 +90,7 @@ class FormDelete extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $query = \Drupal::database();
+    $query = $this->database;
     $query->delete('feedback')
       ->condition('feedback_id',$this->feedback_id)
       ->execute();

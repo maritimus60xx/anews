@@ -45,13 +45,11 @@ class FeedbackSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this -> config('feedback.settings');
     $config
       -> set('allowed_value', $form_state -> getValue('allowed_value'))
       -> save();
-
     parent::submitForm($form, $form_state);
   }
 }

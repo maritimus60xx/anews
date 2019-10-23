@@ -8,10 +8,7 @@ namespace Drupal\feedback\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\User\Entity\User;
 
 /**
  * Provides an 'Feedback' Block
@@ -58,17 +55,5 @@ class FeedbackBlock extends BlockBase implements ContainerFactoryPluginInterface
   {
     $form = $this->formBuilder->getForm('Drupal\feedback\Form\FeedbackForm');
     return $form;
-  }
-  public function blockAccess(AccountInterface $account)
-  {
-    /**
-     * @var \Drupal\user\Entity\User $user
-     */
-
-    $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
-    if(($user->id())>=0) {
-      return AccessResult::allowedIfHasPermission($account, 'view feedback');
-    }
-    return AccessResult::forbidden();
   }
 }

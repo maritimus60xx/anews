@@ -5,61 +5,115 @@
  */
 namespace Drupal\feedback\Form;
 
-use Drupal\Core\Database\Database;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\User\Entity\User;
-use Drupal\Core\Config\ConfigFactory;
+use Drupal\Core\Session\AccountProxyInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Provides an feedback form.
  */
 class FeedbackForm extends FormBase {
+
+  /**
+   * The Database Connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
+   * FeedbackForm constructor.
+   *
+   * @param \Drupal\Core\Database\Connection $database
+   *
+   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
+   *
+   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *
+   */
+  public function __construct(Connection $database, RequestStack $request_stack, AccountProxyInterface $current_user, ConfigFactoryInterface $config_factory) {
+    $this->database = $database;
+    $this->requestStack = $request_stack;
+    $this->currentUser = $current_user;
+    $this->configFactory = $config_factory;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('database'),
+      $container->get('request_stack'),
+      $container->get('current_user'),
+      $container->get('config.factory')
+    );
+  }
+
   /**
    * (@inheritdoc)
    */
-  public function getFormId()
-  {
+  public function getFormId() {
     return 'feedback_form';
   }
   /**
    * (@inheritdoc)
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
-    $conn = Database::getConnection();
+    $getFilterValue = $this->requestStack->getCurrentRequest()->query->get('num');
     $record = array();
-    if (isset($_GET['num'])) {
-      $query = $conn->select('feedback', 'f')
-        ->condition('feedback_id', $_GET['num'])
+    if (isset($getFilterValue)) {
+      $query = $this->database->select('feedback', 'f')
+        ->condition('feedback_id', $getFilterValue)
         ->fields('f');
       $record = $query->execute()->fetchAssoc();
     }
 
     $form['name'] = array(
-      '#title' => t('Your Name'),
+      '#title' => $this->t('Your Name'),
       '#type' => 'textfield',
       '#size' => 50,
       '#required' => TRUE,
-      '#default_value' => (isset($record['name']) && $_GET['num']) ? $record['name']:'',
+      '#default_value' => (isset($record['name']) && $getFilterValue) ? $record['name']:'',
     );
     $form['email'] = array(
-      '#title' => t('Your Email'),
+      '#title' => $this->t('Your Email'),
       '#type' => 'email',
       '#size' => 25,
       '#required' => TRUE,
-      '#default_value' => (isset($record['email']) && $_GET['num']) ? $record['email']:'',
+      '#default_value' => (isset($record['email']) && $getFilterValue) ? $record['email']:'',
     );
     $form['message'] = array(
-      '#title' => t('Your Message'),
+      '#title' => $this->t('Your Message'),
       '#type' => 'textarea',
       '#required' => TRUE,
-      '#default_value' => (isset($record['message']) && $_GET['num']) ? $record['message']:'',
+      '#default_value' => (isset($record['message']) && $getFilterValue) ? $record['message']:'',
     );
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Send')
+      '#value' => $this->t('Send')
     );
     return $form;
   }
@@ -76,14 +130,13 @@ class FeedbackForm extends FormBase {
     if (strlen($form_state->getValue('message')) < 1) {
       $form_state->setErrorByName('message', $this->t('Message is too short.'));
     }
-//    get value of config form
-//    $config = \Drupal::service('config.factory')->get('feedback.admin_settings');
-    $config = \Drupal::configFactory()->getEditable('feedback.settings');
+
+    $config = $this->configFactory->getEditable('feedback.settings');
     $configuration = $config->get('allowed_value');
 //    get user's email
     $email_now = $form_state->getValue('email');
 //    check email in the database
-    $query = \Drupal::database()->select('feedback', 'f');
+    $query = $this->database->select('feedback', 'f');
     $query->addField('f', 'email');
     $email_db = $query->execute()->fetchCol();
 
@@ -97,11 +150,11 @@ class FeedbackForm extends FormBase {
    * @inheritDoc
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
-
-    if (isset($_GET['num'])) {
-      $query = \Drupal::database();
-      $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+    $getFilterValue = $this->requestStack->getCurrentRequest()->query->get('num');
+    if (isset($getFilterValue)) {
+      $query = $this->database;
+      $userId = $this->currentUser->id();
+      $user = \Drupal\user\Entity\User::load($this->currentUser->id());
       $query->update('feedback')
         ->fields([
           'name' => $form_state -> getValue('name'),
@@ -110,14 +163,14 @@ class FeedbackForm extends FormBase {
           'uid' => $user -> id(),
           'created' => time(),
         ])
-        ->condition('feedback_id', $_GET['num'])
+        ->condition('feedback_id', $getFilterValue)
         ->execute();
       drupal_set_message("Successfully changed");
       $form_state->setRedirect('feedback.report');
     }
     else {
-      $query = \Drupal::database()->insert('feedback');
-      $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+      $query = $this->database->insert('feedback');
+      $user = \Drupal\user\Entity\User::load($this->currentUser->id());
       $query->fields([
         'name' => $form_state -> getValue('name'),
         'email' => $form_state -> getValue('email'),
