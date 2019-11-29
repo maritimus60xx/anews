@@ -1,5 +1,0 @@
-name: Feedback
-type: module
-description: 'Page feedback for Drupal'
-package: Feedback
-core: 8.x
