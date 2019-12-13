@@ -9,6 +9,8 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\user\UserInterface;
 use Drupal\Core\Entity\EntityChangedTrait;
+use Drupal\Core\Session\AccountProxyInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines the Feedback entity class.
@@ -19,15 +21,24 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   label = @Translation("Feedback"),
  *   base_table = "feedback",
  *   admin_permission = "administer feedback",
+ *   handlers = {
+ *     "form" = {
+ *       "delete" = "Drupal\feedback\Form\FeedbackDeleteForm",
+ *      },
+ *   },
  *   entity_keys = {
  *     "id" = "feedback_id",
  *     "label" = "message",
  *     "uid" = "uid",
  *   },
+ *   links = {
+ *     "delete-form" = "/admin/reports/feedback/{feedback}/delete",
+ *   },
 
  *   field_ui_base_route = "feedback.admin_settings",
  *  )
  */
+
 class Feedback extends ContentEntityBase implements FeedbackInterface {
 
   use EntityChangedTrait;
@@ -73,21 +84,21 @@ class Feedback extends ContentEntityBase implements FeedbackInterface {
    * {@inheritdoc}
    */
   public function getOwner() {
-    return $this->get('user_id')->entity;
+    return $this->get('uid')->entity;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOwnerId() {
-    return $this->get('user_id')->target_id;
+    return $this->get('uid')->target_id;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setOwnerId($uid) {
-    $this->set('user_id', $uid);
+    $this->set('uid', $uid);
     return $this;
   }
 
@@ -95,7 +106,7 @@ class Feedback extends ContentEntityBase implements FeedbackInterface {
    * {@inheritdoc}
    */
   public function setOwner(UserInterface $account) {
-    $this->set('user_id', $account->id());
+    $this->set('uid', $account->id());
     return $this;
   }
 
@@ -126,6 +137,7 @@ class Feedback extends ContentEntityBase implements FeedbackInterface {
       ->setSettings([
         'max_length' => 52,
         'text_processing' => 0,
+
       ]);
 
     $fields['message'] = BaseFieldDefinition::create('string')

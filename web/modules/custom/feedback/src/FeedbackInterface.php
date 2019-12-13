@@ -7,7 +7,7 @@ use Drupal\user\EntityOwnerInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
 
 /**
- * Provides an interface defining a Contact entity.
+ * Provides an interface defining a Feedback entity.
  *
  * We have this interface so we can join the other interfaces it extends.
  *

@@ -1,10 +1,9 @@
 feedback.content:
   path: '/feedback'
   defaults:
-    _controller: 'Drupal\feedback\Controller\FeedbackController::content'
-    _title: 'Feedback'
+    _form: '\Drupal\feedback\Form\FeedbackForm'
   requirements:
-    _permission: 'access content'
+    _permission: 'access feedback form'
 
 feedback.admin_settings:
   path: '/admin/config/content/feedback'
@@ -17,25 +16,24 @@ feedback.admin_settings:
 feedback.report:
   path: '/admin/reports/feedback'
   defaults:
-    _controller: '\Drupal\feedback\Controller\ReportController::description'
+    _controller: '\Drupal\feedback\Controller\ReportController::createReportTable'
     _title: 'List of Feedback'
   requirements:
     _permission: 'administer feedback'
 
-feedback.delete_form:
-  path: '/admin/reports/feedback/delete/{cid}'
-  defaults:
-    _form: '\Drupal\feedback\Form\FormDelete'
-    _title: 'DeleteForm'
-  requirements:
-    _access: 'TRUE'
-    _permission: 'administer feedback'
-
-feedback.feedback_form:
+feedback.edit_form:
   path: '/admin/reports/feedback-edit'
   defaults:
     _form: '\Drupal\feedback\Form\FeedbackForm'
     _title: 'FeedbackForm'
   requirements:
     _access: 'TRUE'
+    _permission: 'administer feedback'
+
+entity.feedback.delete_form:
+  path: '/admin/reports/feedback/{feedback}/delete'
+  defaults:
+    _entity_form: feedback.delete
+    _title: 'Delete feedback'
+  requirements:
     _permission: 'administer feedback'

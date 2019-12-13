@@ -67,8 +67,8 @@ class ReportController extends ControllerBase {
   /**
    * A simple controller method to explain what the report is about.
    */
-  public function description() {
-
+  public function createReportTable() {
+    // Create sortable header.
     $header = [
       ['data' => $this->t('Feedback_id'), 'field' => 'f.feedback_id'],
       ['data' => $this->t('User_ID'), 'field' => 'f.uid'],
@@ -79,22 +79,26 @@ class ReportController extends ControllerBase {
       ['data' => $this->t('Operation')],
       ['data' => $this->t('Operation')],
     ];
-
+    // Get value FeedbackFilterForm.
     $getFilterValue = $this->requestStack->getCurrentRequest()->query->get('filter');
 
     if (isset($getFilterValue)) {
-      $get_value = $this->database->escapeLike($getFilterValue);
+      $get_value_filter = $this->database->escapeLike($getFilterValue);
       $query = $this->database->select('feedback', 'f');
       $query->fields('f');
-      $query->condition('f.name', $get_value  . '%', 'LIKE');
+      // Search for a verbatim string without any wildcard behavior.
+      $query->condition('f.name', $get_value_filter . '%', 'LIKE');
 
-    } else {
-      $query = $this->database->select('feedback', 'f');
-      $query->fields('f');
     }
+    else {
+      $query = $this->database->select('feedback', 'f');
+      $query->fields('f');
 
+    }
+    // Use TableSortExtender for sorting data.
     $table_sort = $query->extend('Drupal\Core\Database\Query\TableSortExtender')
       ->orderByHeader($header);
+    // Implement a pager.
     $pager = $table_sort->extend('Drupal\Core\Database\Query\PagerSelectExtender')
       ->limit(50);
 
@@ -103,27 +107,31 @@ class ReportController extends ControllerBase {
 
     $rows = [];
     foreach ($result as $data) {
-      $delete = Url::fromUserInput('/admin/reports/feedback/delete/'.$data->feedback_id);
-      $edit   = Url::fromUserInput('/admin/reports/feedback-edit?num='.$data->feedback_id);
+      // Add Delete and Edit links.
+      $delete = Url::fromRoute('entity.feedback.delete_form', array(
+        'feedback' => $data->feedback_id
+      ));
+      $edit = Url::fromUserInput('/admin/reports/feedback-edit', ['query'=> array('fid' => $data->feedback_id)]);
+
 
       $rows[] = array(
-        'feedback_id' =>$data->feedback_id,
+        'feedback_id' => $data->feedback_id,
         'uid' => $data->uid,
         'name' => $data->name,
         'email' => $data->email,
         'message' => $data->message,
         'created' => $data->created,
-        Link::fromTextAndUrl('Delete', $delete),
-        Link::fromTextAndUrl('Edit', $edit),
+        Link::fromTextAndUrl($this->t('Delete'), $delete),
+        Link::fromTextAndUrl($this->t('Edit'), $edit),
       );
     }
 
-    // Build the table.
-
+    // Add FeedbackFilterForm to the controller.
     $build['form'] = [
       $form = $this->formBuilder->getForm('Drupal\feedback\Form\FeedbackFilterForm'),
     ];
 
+    // Build the table.
     $build['feedback_table'] = [
       '#theme' => 'table',
       '#header' => $header,

@@ -12,12 +12,14 @@ use Drupal\Core\Form\FormStateInterface;
  * Defines a form to configure Feedback module settings
  */
 class FeedbackSettingsForm extends ConfigFormBase {
+
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
     return 'feedback.admin_settings';
   }
+
   /**
    * {@inheritdoc}
    */
@@ -27,11 +29,11 @@ class FeedbackSettingsForm extends ConfigFormBase {
       'feedback.settings'
     ];
   }
+
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state)
-  {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this -> config('feedback.settings');
     $form['allowed_value'] = array(
       '#type' => 'checkbox',
@@ -39,9 +41,9 @@ class FeedbackSettingsForm extends ConfigFormBase {
       '#default_value' => $config -> get('allowed_value'),
       '#description' => $this -> t('User will not be able to submit the form an unlimited number.'),
     );
-
     return parent::buildForm($form, $form_state);
   }
+
   /**
    * {@inheritdoc}
    */

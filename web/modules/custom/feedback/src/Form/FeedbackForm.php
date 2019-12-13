@@ -77,40 +77,59 @@ class FeedbackForm extends FormBase {
   public function getFormId() {
     return 'feedback_form';
   }
+
   /**
    * (@inheritdoc)
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $getFilterValue = $this->requestStack->getCurrentRequest()->query->get('num');
+    // Check GET value.
+    $getFilterValue = $this->requestStack->getCurrentRequest()->query->get('fid');
+    // Checking for form editing.
     $record = array();
     if (isset($getFilterValue)) {
       $query = $this->database->select('feedback', 'f')
         ->condition('feedback_id', $getFilterValue)
         ->fields('f');
       $record = $query->execute()->fetchAssoc();
+      // This field created for editing form. When form creating at the first time this field do not using.
+      $form['fid'] = array(
+        '#title' => $this->t('feedback_id'),
+        '#type' => 'hidden',
+        '#size' => 6,
+        '#required' => FALSE,
+        // If form editing then id form insert to this field.
+        '#default_value' => $getFilterValue,
+      );
     }
 
+    // Add name field.
     $form['name'] = array(
       '#title' => $this->t('Your Name'),
       '#type' => 'textfield',
       '#size' => 50,
       '#required' => TRUE,
+      //  If form editing then insert default values from database to this input.
       '#default_value' => (isset($record['name']) && $getFilterValue) ? $record['name']:'',
     );
+    // Add email field.
     $form['email'] = array(
       '#title' => $this->t('Your Email'),
       '#type' => 'email',
       '#size' => 25,
       '#required' => TRUE,
+      //  If form editing then insert default values from database to this input.
       '#default_value' => (isset($record['email']) && $getFilterValue) ? $record['email']:'',
     );
+    // Add textarea field.
     $form['message'] = array(
       '#title' => $this->t('Your Message'),
       '#type' => 'textarea',
       '#required' => TRUE,
+      //  If form editing then insert default values from database to this input.
       '#default_value' => (isset($record['message']) && $getFilterValue) ? $record['message']:'',
     );
     $form['actions']['#type'] = 'actions';
+    // Submit button.
     $form['actions']['submit'] = array(
       '#type' => 'submit',
       '#value' => $this->t('Send')
@@ -119,69 +138,84 @@ class FeedbackForm extends FormBase {
   }
 
   /**
-   * start validation forms
+   * Start validation form.
    * @inheritDoc
    */
-  public function validateForm(array &$form, FormStateInterface $form_state)
-  {
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+
+    // Check length name.
     if (strlen($form_state->getValue('name')) < 5) {
       $form_state->setErrorByName('name', $this->t('Name is too short.'));
     }
-    if (strlen($form_state->getValue('message')) < 1) {
+    // Check length message.
+    if (strlen($form_state->getValue('message')) < 5) {
       $form_state->setErrorByName('message', $this->t('Message is too short.'));
     }
 
+    // Get configuration form value.
     $config = $this->configFactory->getEditable('feedback.settings');
     $configuration = $config->get('allowed_value');
-//    get user's email
+
+    // Get user's email.
     $email_now = $form_state->getValue('email');
-//    check email in the database
+
+    // Check email in the database.
     $query = $this->database->select('feedback', 'f');
     $query->addField('f', 'email');
     $email_db = $query->execute()->fetchCol();
 
+    // One email to one feedback.
+    // There is a configuration form where you can cancel it.
     if ($email_db[0] == $email_now && $configuration == 1 ) {
-      $form_state->setErrorByName('email', $this -> t('The email can not be use for form resubmit'));
+      $form_state->setErrorByName('email', $this->t('The email can not be use for form resubmit, because it was already used for sending'));
     }
   }
 
   /**
-   * Start submit form
+   * Start submit form.
    * @inheritDoc
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $getFilterValue = $this->requestStack->getCurrentRequest()->query->get('num');
-    if (isset($getFilterValue)) {
+
+    // Get Feedback id if form edit.
+    $feedback_id = $form_state->getValue('fid');
+    // If we edit feedback, then values update,
+    // else values insert.
+    if ($feedback_id > 0) {
+      // Database connection.
       $query = $this->database;
+      // Current user.
       $userId = $this->currentUser->id();
-      $user = \Drupal\user\Entity\User::load($this->currentUser->id());
+      // Update feedback.
       $query->update('feedback')
         ->fields([
-          'name' => $form_state -> getValue('name'),
-          'email' => $form_state -> getValue('email'),
-          'message' => $form_state -> getValue('message'),
-          'uid' => $user -> id(),
+          'name' => $form_state->getValue('name'),
+          'email' => $form_state->getValue('email'),
+          'message' => $form_state->getValue('message'),
+          'uid' => $userId,
           'created' => time(),
         ])
-        ->condition('feedback_id', $getFilterValue)
+        ->condition('feedback_id', $feedback_id)
         ->execute();
-      drupal_set_message("Successfully changed");
+      drupal_set_message($this->t('Successfully changed'));
+      // Return to report page.
       $form_state->setRedirect('feedback.report');
+
     }
     else {
+      // If you create a feedback, this part of a code is being used.
       $query = $this->database->insert('feedback');
-      $user = \Drupal\user\Entity\User::load($this->currentUser->id());
+      $userId = $this->currentUser->id();
       $query->fields([
-        'name' => $form_state -> getValue('name'),
-        'email' => $form_state -> getValue('email'),
-        'message' => $form_state -> getValue('message'),
-        'uid' => $user -> id(),
+        'name' => $form_state->getValue('name'),
+        'email' => $form_state->getValue('email'),
+        'message' => $form_state->getValue('message'),
+        'uid' => $userId,
         'created' => time(),
       ]);
       $query->execute();
-      drupal_set_message(t('Your message has been sent'));
+      drupal_set_message($this->t('Your message has been sent'));
+
     }
-
-
   }
 }

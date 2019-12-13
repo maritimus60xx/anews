@@ -51,8 +51,8 @@ class FeedbackBlock extends BlockBase implements ContainerFactoryPluginInterface
    * {@inheritDoc}
    */
 
-  public function build()
-  {
+  public function build() {
+    // Get FeedbackForm for the plugin.
     $form = $this->formBuilder->getForm('Drupal\feedback\Form\FeedbackForm');
     return $form;
   }

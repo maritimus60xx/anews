@@ -46,27 +46,31 @@ class FeedbackFilterForm extends FormBase {
   {
     return 'feedback_filter_form';
   }
+
   /**
    * (@inheritdoc)
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $getFilterValue = $this->requestStack->getCurrentRequest()->query->get('filter');
+    // Create filter form.
     $form['filter'] = array(
       '#title' => $this->t('Enter text'),
       '#type' => 'textfield',
       '#size' => 20,
-      '#required' => TRUE,
+      '#required' => FALSE,
+      // Тo keep the data entered in the input.
       '#default_value' => (isset($getFilterValue) ? $getFilterValue:''),
     );
     $form['actions']['submit'] = array(
       '#type' => 'submit',
-      '#value' =>$this->t('Filter'),
+      '#value' => $this->t('Filter'),
     );
     return $form;
 
   }
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $filter = Url::fromUserInput('/admin/reports/feedback/?filter='.$form_state->getValue('filter'));
+    // Add GET parameter from FilterForm to url.
+    $filter = Url::fromUserInput('/admin/reports/feedback/', ['query'=> array('filter' => $form_state->getValue('filter'))]);
     $form_state->setRedirectUrl($filter);
   }
 }
