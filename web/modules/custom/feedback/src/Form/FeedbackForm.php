@@ -1,8 +1,5 @@
 <?php
-/**
- * @file
- * Contains \Drupal\feedback\Form\FeedbackForm
- */
+
 namespace Drupal\feedback\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -26,16 +23,22 @@ class FeedbackForm extends FormBase {
   protected $database;
 
   /**
+   * Retrieves the request stack.
+   *
    * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 
   /**
+   * Gets the current active user.
+   *
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
   protected $currentUser;
 
   /**
+   * Retrieves the configuration factory.
+   *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
@@ -44,13 +47,13 @@ class FeedbackForm extends FormBase {
    * FeedbackForm constructor.
    *
    * @param \Drupal\Core\Database\Connection $database
-   *
+   *   The Database Connection.
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
-   *
+   *   Retrieves the request stack.
    * @param \Drupal\Core\Session\AccountProxyInterface $current_user
-   *
+   *   Gets the current active user.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *
+   *   Retrieves the configuration factory.
    */
   public function __construct(Connection $database, RequestStack $request_stack, AccountProxyInterface $current_user, ConfigFactoryInterface $config_factory) {
     $this->database = $database;
@@ -72,14 +75,14 @@ class FeedbackForm extends FormBase {
   }
 
   /**
-   * (@inheritdoc)
+   * {@inheritdoc}
    */
   public function getFormId() {
     return 'feedback_form';
   }
 
   /**
-   * (@inheritdoc)
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     // Check GET value.
@@ -91,7 +94,8 @@ class FeedbackForm extends FormBase {
         ->condition('feedback_id', $getFilterValue)
         ->fields('f');
       $record = $query->execute()->fetchAssoc();
-      // This field created for editing form. When form creating at the first time this field do not using.
+      // This field created for editing form.
+      // When form creating at the first time this field do not using.
       $form['fid'] = array(
         '#title' => $this->t('feedback_id'),
         '#type' => 'hidden',
@@ -101,15 +105,14 @@ class FeedbackForm extends FormBase {
         '#default_value' => $getFilterValue,
       );
     }
-
     // Add name field.
     $form['name'] = array(
       '#title' => $this->t('Your Name'),
       '#type' => 'textfield',
       '#size' => 50,
       '#required' => TRUE,
-      //  If form editing then insert default values from database to this input.
-      '#default_value' => (isset($record['name']) && $getFilterValue) ? $record['name']:'',
+      // If form editing then insert default values from database to this input.
+      '#default_value' => (isset($record['name']) && $getFilterValue) ? $record['name'] : '',
     );
     // Add email field.
     $form['email'] = array(
@@ -117,29 +120,30 @@ class FeedbackForm extends FormBase {
       '#type' => 'email',
       '#size' => 25,
       '#required' => TRUE,
-      //  If form editing then insert default values from database to this input.
-      '#default_value' => (isset($record['email']) && $getFilterValue) ? $record['email']:'',
+      // If form editing then insert default values from database to this input.
+      '#default_value' => (isset($record['email']) && $getFilterValue) ? $record['email'] : '',
     );
     // Add textarea field.
     $form['message'] = array(
       '#title' => $this->t('Your Message'),
       '#type' => 'textarea',
       '#required' => TRUE,
-      //  If form editing then insert default values from database to this input.
-      '#default_value' => (isset($record['message']) && $getFilterValue) ? $record['message']:'',
+      // If form editing then insert default values from database to this input.
+      '#default_value' => (isset($record['message']) && $getFilterValue) ? $record['message'] : '',
     );
     $form['actions']['#type'] = 'actions';
     // Submit button.
     $form['actions']['submit'] = array(
       '#type' => 'submit',
-      '#value' => $this->t('Send')
+      '#value' => $this->t('Send'),
     );
     return $form;
   }
 
   /**
    * Start validation form.
-   * @inheritDoc
+   *
+   * {@inheritdoc}.
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
 
@@ -166,14 +170,15 @@ class FeedbackForm extends FormBase {
 
     // One email to one feedback.
     // There is a configuration form where you can cancel it.
-    if ($email_db[0] == $email_now && $configuration == 1 ) {
+    if ($email_db[0] == $email_now && $configuration == 1) {
       $form_state->setErrorByName('email', $this->t('The email can not be use for form resubmit, because it was already used for sending'));
     }
   }
 
   /**
    * Start submit form.
-   * @inheritDoc
+   *
+   * {@inheritDoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
@@ -218,4 +223,5 @@ class FeedbackForm extends FormBase {
 
     }
   }
+
 }

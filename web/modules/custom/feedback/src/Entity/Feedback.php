@@ -9,12 +9,9 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\user\UserInterface;
 use Drupal\Core\Entity\EntityChangedTrait;
-use Drupal\Core\Session\AccountProxyInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines the Feedback entity class.
- *
  *
  * @ContentEntityType(
  *   id = "feedback",
@@ -34,11 +31,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   links = {
  *     "delete-form" = "/admin/reports/feedback/{feedback}/delete",
  *   },
-
  *   field_ui_base_route = "feedback.admin_settings",
  *  )
  */
-
 class Feedback extends ContentEntityBase implements FeedbackInterface {
 
   use EntityChangedTrait;
@@ -52,6 +47,7 @@ class Feedback extends ContentEntityBase implements FeedbackInterface {
       'user_id' => \Drupal::currentUser()->id(),
     ];
   }
+
   /**
    * {@inheritdoc}
    */
@@ -66,6 +62,7 @@ class Feedback extends ContentEntityBase implements FeedbackInterface {
   public function getMessage() {
     return $this->get('message')->value;
   }
+
   /**
    * {@inheritdoc}
    */
@@ -80,6 +77,7 @@ class Feedback extends ContentEntityBase implements FeedbackInterface {
   public function getCreated() {
     return $this->get('created')->value;
   }
+
   /**
    * {@inheritdoc}
    */
@@ -166,5 +164,5 @@ class Feedback extends ContentEntityBase implements FeedbackInterface {
 
     return $fields;
   }
-}
 
+}

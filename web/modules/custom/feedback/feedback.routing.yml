@@ -1,10 +1,3 @@
-feedback.content:
-  path: '/feedback'
-  defaults:
-    _form: '\Drupal\feedback\Form\FeedbackForm'
-  requirements:
-    _permission: 'access feedback form'
-
 feedback.admin_settings:
   path: '/admin/config/content/feedback'
   defaults:
@@ -21,6 +14,7 @@ feedback.report:
   requirements:
     _permission: 'administer feedback'
 
+# Feedback_id get from GET in ReportController.
 feedback.edit_form:
   path: '/admin/reports/feedback-edit'
   defaults:

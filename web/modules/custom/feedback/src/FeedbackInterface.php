@@ -13,6 +13,4 @@ use Drupal\Core\Entity\EntityChangedInterface;
  *
  * @ingroup feedback
  */
-interface FeedbackInterface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface {
-
-}
+interface FeedbackInterface extends ContentEntityInterface, EntityOwnerInterface, EntityChangedInterface {}

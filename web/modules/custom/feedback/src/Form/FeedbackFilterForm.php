@@ -1,8 +1,5 @@
 <?php
-/**
- * @file
- * Contains \Drupal\feedback\Form\FeedbackFilterForm
- */
+
 namespace Drupal\feedback\Form;
 
 use Drupal\Core\Form\FormBase;
@@ -17,14 +14,17 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class FeedbackFilterForm extends FormBase {
 
   /**
+   * Retrieves the request stack.
+   *
    * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 
   /**
-   * Constructor.
+   * Constructor FilterForm.
    *
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
+   *   Retrieves the request stack.
    */
   public function __construct(RequestStack $request_stack) {
     $this->requestStack = $request_stack;
@@ -40,15 +40,14 @@ class FeedbackFilterForm extends FormBase {
   }
 
   /**
-   * (@inheritdoc)
+   * {@inheritdoc}
    */
-  public function getFormId()
-  {
+  public function getFormId() {
     return 'feedback_filter_form';
   }
 
   /**
-   * (@inheritdoc)
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $getFilterValue = $this->requestStack->getCurrentRequest()->query->get('filter');
@@ -59,7 +58,7 @@ class FeedbackFilterForm extends FormBase {
       '#size' => 20,
       '#required' => FALSE,
       // Тo keep the data entered in the input.
-      '#default_value' => (isset($getFilterValue) ? $getFilterValue:''),
+      '#default_value' => (isset($getFilterValue) ? $getFilterValue : ''),
     );
     $form['actions']['submit'] = array(
       '#type' => 'submit',
@@ -68,9 +67,14 @@ class FeedbackFilterForm extends FormBase {
     return $form;
 
   }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Add GET parameter from FilterForm to url.
-    $filter = Url::fromUserInput('/admin/reports/feedback/', ['query'=> array('filter' => $form_state->getValue('filter'))]);
+    $filter = Url::fromUserInput('/admin/reports/feedback/', ['query' => array('filter' => $form_state->getValue('filter'))]);
     $form_state->setRedirectUrl($filter);
   }
+
 }

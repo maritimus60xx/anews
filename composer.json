@@ -62,6 +62,7 @@
         "drupal/youtube": "^1.0@beta",
         "drush/drush": "^9.0.0",
         "oomphinc/composer-installers-extender": "^1.1",
+        "squizlabs/php_codesniffer": "^3.5",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",

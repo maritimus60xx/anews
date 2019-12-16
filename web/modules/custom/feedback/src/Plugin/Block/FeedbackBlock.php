@@ -1,8 +1,5 @@
 <?php
-/**
- * @file
- * contains \Drupal\feedback\Plugin\Block\FeedbackBlock
- */
+
 namespace Drupal\feedback\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
@@ -11,23 +8,23 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides an 'Feedback' Block
+ * Provides an 'Feedback' Block.
+ *
  * @Block(
  *   id = "feedback_block",
  *   admin_label = @Translation("Feedback Block"),
  * )
  */
-
 class FeedbackBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
   /**
    * {@inheritdoc}
    */
   protected $formBuilder;
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
-
   public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $formBuilder) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->formBuilder = $formBuilder;
@@ -35,9 +32,7 @@ class FeedbackBlock extends BlockBase implements ContainerFactoryPluginInterface
 
   /**
    * {@inheritdoc}
-   *
    */
-
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration,
@@ -48,12 +43,11 @@ class FeedbackBlock extends BlockBase implements ContainerFactoryPluginInterface
   }
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
-
   public function build() {
     // Get FeedbackForm for the plugin.
-    $form = $this->formBuilder->getForm('Drupal\feedback\Form\FeedbackForm');
-    return $form;
+    return $this->formBuilder->getForm('Drupal\feedback\Form\FeedbackForm');
   }
+
 }

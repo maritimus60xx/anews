@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\feedback\Controller\ReportController.
- */
-
 namespace Drupal\feedback\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
@@ -14,7 +9,6 @@ use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-
 
 /**
  * Controller routines for report routes.
@@ -29,11 +23,15 @@ class ReportController extends ControllerBase {
   protected $database;
 
   /**
+   * Retrieves the request stack.
+   *
    * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 
   /**
+   * Returns the form builder service.
+   *
    * @var \Drupal\Core\Form\FormBuilderInterface
    */
   protected $formBuilder;
@@ -42,10 +40,11 @@ class ReportController extends ControllerBase {
    * ReportController constructor.
    *
    * @param \Drupal\Core\Database\Connection $database
-   *
+   *   The Database Connection.
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
-   *
+   *   Retrieves the request stack.
    * @param \Drupal\Core\Form\FormBuilderInterface $formBuilder
+   *   Returns the form builder service.
    */
   public function __construct(Connection $database, RequestStack $request_stack, FormBuilderInterface $formBuilder) {
     $this->database = $database;
@@ -109,10 +108,9 @@ class ReportController extends ControllerBase {
     foreach ($result as $data) {
       // Add Delete and Edit links.
       $delete = Url::fromRoute('entity.feedback.delete_form', array(
-        'feedback' => $data->feedback_id
+        'feedback' => $data->feedback_id,
       ));
-      $edit = Url::fromUserInput('/admin/reports/feedback-edit', ['query'=> array('fid' => $data->feedback_id)]);
-
+      $edit = Url::fromUserInput('/admin/reports/feedback-edit', ['query' => array('fid' => $data->feedback_id)]);
 
       $rows[] = array(
         'feedback_id' => $data->feedback_id,
@@ -121,8 +119,8 @@ class ReportController extends ControllerBase {
         'email' => $data->email,
         'message' => $data->message,
         'created' => $data->created,
-        Link::fromTextAndUrl($this->t('Delete'), $delete),
-        Link::fromTextAndUrl($this->t('Edit'), $edit),
+        'delete' => Link::fromTextAndUrl($this->t('Delete'), $delete),
+        'edit' => Link::fromTextAndUrl($this->t('Edit'), $edit),
       );
     }
 
@@ -138,9 +136,9 @@ class ReportController extends ControllerBase {
       '#rows' => $rows,
     ];
 
-    //  Add the pager.
+    // Add the pager.
     $build['pager'] = array(
-      '#type' => 'pager'
+      '#type' => 'pager',
     );
 
     return $build;
