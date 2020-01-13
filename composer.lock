@@ -11401,6 +11401,7 @@
                 "GPL-2.0-or-later"
             ],
             "description": "require-dev dependencies from drupal/core",
+            "abandoned": "drupal/core-dev",
             "time": "2019-05-23T07:31:39+00:00"
         }
     ],
