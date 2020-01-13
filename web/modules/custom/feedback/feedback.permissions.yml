@@ -1,0 +1,12 @@
+access feedback form:
+  title: 'View Feedback Form'
+  description: 'View and submit the Feedback form'
+access feedback report:
+  title: 'Access List of Feedback'
+  description: 'View the report listing all Feedback submitted.'
+administer feedback:
+  title: 'Administer Feedback settings'
+  description: 'Access the Feedback administrative settings page.'
+  restrict access: true
+access content overview:
+  title: 'Access the Feedback overview page'
