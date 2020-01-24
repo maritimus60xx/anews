@@ -1,0 +1,7 @@
+#Schema for the configuration file of feedback module.
+feedback.settings:
+  type: config_object
+  mapping:
+    prohibit_resubmit_value:
+      type: boolean
+      label: 'Default values for resubmit form'
