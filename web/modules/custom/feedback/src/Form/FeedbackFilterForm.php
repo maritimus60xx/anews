@@ -58,7 +58,7 @@ class FeedbackFilterForm extends FormBase {
       '#size' => 20,
       '#required' => FALSE,
       // Тo keep the data entered in the input.
-      '#default_value' => (isset($getFilterValue) ? $getFilterValue : ''),
+      '#default_value' => (!$getFilterValue == NULL ? $getFilterValue : ''),
     );
     $form['actions']['submit'] = array(
       '#type' => 'submit',

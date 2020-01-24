@@ -78,10 +78,10 @@ class ReportController extends ControllerBase {
       ['data' => $this->t('Operation')],
       ['data' => $this->t('Operation')],
     ];
-    // Get value FeedbackFilterForm.
+
     $getFilterValue = $this->requestStack->getCurrentRequest()->query->get('filter');
 
-    if (isset($getFilterValue)) {
+    if (!$getFilterValue == NULL) {
       $get_value_filter = $this->database->escapeLike($getFilterValue);
       $query = $this->database->select('feedback', 'f');
       $query->fields('f');
@@ -110,7 +110,9 @@ class ReportController extends ControllerBase {
       $delete = Url::fromRoute('entity.feedback.delete_form', array(
         'feedback' => $data->feedback_id,
       ));
-      $edit = Url::fromUserInput('/admin/reports/feedback-edit', ['query' => array('fid' => $data->feedback_id)]);
+      $edit = Url::fromRoute('entity.feedback.edit_form', array(
+        'feedback' => $data->feedback_id,
+      ));
 
       $rows[] = array(
         'feedback_id' => $data->feedback_id,

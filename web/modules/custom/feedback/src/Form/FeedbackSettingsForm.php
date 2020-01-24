@@ -22,7 +22,7 @@ class FeedbackSettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'feedback.settings'
+      'feedback.settings',
     ];
   }
 
@@ -34,7 +34,7 @@ class FeedbackSettingsForm extends ConfigFormBase {
     $form['allowed_value'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Prohibit resubmit the form'),
-      '#default_value' => $config->get('allowed_value'),
+      '#default_value' => $config->get('prohibit_resubmit_value'),
       '#description' => $this->t('User will not be able to submit the form an unlimited number.'),
     );
     return parent::buildForm($form, $form_state);
@@ -46,7 +46,7 @@ class FeedbackSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config('feedback.settings');
     $config
-      ->set('allowed_value', $form_state->getValue('allowed_value'))
+      ->set('prohibit_resubmit_value', $form_state->getValue('allowed_value'))
       ->save();
     parent::submitForm($form, $form_state);
   }

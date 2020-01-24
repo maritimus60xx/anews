@@ -2,7 +2,6 @@
 
 namespace Drupal\feedback\Entity;
 
-use Drupal\feedback\FeedbackInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
@@ -20,6 +19,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *   admin_permission = "administer feedback",
  *   handlers = {
  *     "form" = {
+ *       "default" = "Drupal\feedback\Form\FeedbackEntityForm",
  *       "delete" = "Drupal\feedback\Form\FeedbackDeleteForm",
  *      },
  *   },
@@ -29,12 +29,13 @@ use Drupal\Core\Entity\EntityChangedTrait;
  *     "uid" = "uid",
  *   },
  *   links = {
+ *     "edit-form" = "/admin/reports/feedback/{feedback}/edit",
  *     "delete-form" = "/admin/reports/feedback/{feedback}/delete",
  *   },
  *   field_ui_base_route = "feedback.admin_settings",
  *  )
  */
-class Feedback extends ContentEntityBase implements FeedbackInterface {
+class Feedback extends ContentEntityBase {
 
   use EntityChangedTrait;
 
@@ -44,8 +45,15 @@ class Feedback extends ContentEntityBase implements FeedbackInterface {
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
     $values += [
-      'user_id' => \Drupal::currentUser()->id(),
+      'uid' => \Drupal::currentUser()->id(),
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getName() {
+    return $this->get('name')->value;
   }
 
   /**
@@ -122,31 +130,50 @@ class Feedback extends ContentEntityBase implements FeedbackInterface {
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
       ->setDescription(t('Name of the user.'))
+      ->addConstraint('FeedbackNameLength')
       ->setSettings([
         'max_length' => 255,
         'text_processing' => 0,
       ])
       // Set no default value.
-      ->setDefaultValue(NULL);
+      ->setDefaultValue(NULL)
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -5,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
 
     $fields['email'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Email'))
       ->setDescription(t('Email'))
+      ->addConstraint('FeedbackEmailResubmit')
       ->setSettings([
         'max_length' => 52,
         'text_processing' => 0,
 
-      ]);
+      ])
+      // Set no default value.
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -5,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
 
     $fields['message'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Message'))
       ->setDescription(t('Your Message.'))
+      ->addConstraint('FeedbackMessageLength')
       ->setSettings([
         'max_length' => 512,
         'text_processing' => 0,
       ])
       // Set no default value.
-      ->setDefaultValue(NULL);
+      ->setDefaultValue(NULL)
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -5,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
 
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('User Id'))

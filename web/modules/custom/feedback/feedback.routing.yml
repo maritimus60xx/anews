@@ -12,17 +12,7 @@ feedback.report:
     _controller: '\Drupal\feedback\Controller\ReportController::createReportTable'
     _title: 'List of Feedback'
   requirements:
-    _permission: 'administer feedback'
-
-# Feedback_id get from GET in ReportController.
-feedback.edit_form:
-  path: '/admin/reports/feedback-edit'
-  defaults:
-    _form: '\Drupal\feedback\Form\FeedbackForm'
-    _title: 'FeedbackForm'
-  requirements:
-    _access: 'TRUE'
-    _permission: 'administer feedback'
+    _permission: 'access feedback overview'
 
 entity.feedback.delete_form:
   path: '/admin/reports/feedback/{feedback}/delete'
@@ -31,3 +21,19 @@ entity.feedback.delete_form:
     _title: 'Delete feedback'
   requirements:
     _permission: 'administer feedback'
+
+entity.feedback.edit_form:
+  path: '/admin/reports/feedback/{feedback}/edit'
+  defaults:
+    _entity_form: feedback.default
+    _title: 'Edit feedback'
+  requirements:
+    _permission: 'administer feedback'
+
+entity.feedback.add_entity:
+  path: '/add_entity'
+  defaults:
+    _entity_form: feedback.default
+    _title: 'Add Feedback'
+  requirements:
+    _permission: 'access feedback form'
